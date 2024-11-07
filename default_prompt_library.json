@@ -1,1 +1,23 @@
-{"system_message": ["", "You are a helpful AI assistant.", "You are as smart as GPT-4o.", "You are a professional working in this specific field.", "Command, we need you to plot a course through this turbulence and locate the source of the anomaly. Use all available data and your expertise to guide us through this challenging situation."], "echo": ["", "Repeat the question before you start to answer the question.", "Rephrase the task instructions in your own words before you start to complete the task.", "Rephrase the following query using short and simple sentences, without loss of details."], "chain_of_thought": ["", "Think step by step.", "Think step by step and explain your reasoning.", "Think step by step and explain your reasoning. Then, answer the question.", "Show your reasoning step by step.", "Let's work through this step by step."]}
+{
+    "system_message": [
+        "",
+        "You are a helpful AI assistant.",
+        "You are as smart as GPT-4o.",
+        "You are a professional working in this specific field.",
+        "Command, we need you to plot a course through this turbulence and locate the source of the anomaly. Use all available data and your expertise to guide us through this challenging situation."
+    ],
+    "echo": [
+        "",
+        "Repeat the question before you start to answer the question.",
+        "Rephrase the task instructions in your own words before you start to complete the task.",
+        "Rephrase the following query using short and simple sentences, without loss of details."
+    ],
+    "chain_of_thought": [
+        "",
+        "Think step by step.",
+        "Think step by step and explain your reasoning.",
+        "Think step by step and explain your reasoning. Then, answer the question.",
+        "Show your reasoning step by step.",
+        "Let's work through this step by step."
+    ]
+}

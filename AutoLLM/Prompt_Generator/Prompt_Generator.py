@@ -1,12 +1,21 @@
 import json
 
 class PromptGenerator:
-    def __init__(self):
+    def __init__(self, library_path="./AutoLLM/Prompt_Generator/default_prompt_library.json"):
         """
         Initializes the PromptGenerator by loading the default prompt library from a JSON file.
         """
-        with open("./AutoLLM/Prompt_Generator/default_prompt_library.json", 'r') as f:
-            self.prompt_library = json.load(f)
+        self.load_library(library_path)
+        self.cached_prompt = None
+        self.prompt_fields = [
+            "system_message",
+            "instruction",
+            "chain_of_thought",
+            "echo",
+            "examples",
+            "chat",
+            "prompt_config"
+        ]
     
     def build_subprompt_system_message(self, system_message):
         """
@@ -85,6 +94,7 @@ class PromptGenerator:
         
         return example_func
     
+
     def build_subprompt_few_shot(self, prompt_config, examples):
         """
         Builds the few-shot examples section of the prompt.
@@ -110,6 +120,7 @@ class PromptGenerator:
         self._save_to_library("few_shot_examples", prompt)
         return prompt
     
+
     def build_subprompt_input(self, prompt_config, input_data):
         """
         Builds the input section of the prompt based on the prompt configuration.
@@ -123,20 +134,10 @@ class PromptGenerator:
         """
         example_func = self.build_example_template(prompt_config)
         prompt = example_func(input_data)
-        self._save_to_library("input", prompt)
         return prompt
     
-    def _save_to_library(self, field, text):
-        """
-        Saves the provided text to the specified field in the prompt library.
 
-        Parameters:
-        - field (str): The field in the library to which the text will be added.
-        - text (str): The text content to add to the specified field.
-        """
-        if field not in self.prompt_library:
-            self.prompt_library[field] = []
-        self.prompt_library[field].append(text)
+    
 
     def build_prompt(
             self, 
@@ -145,9 +146,11 @@ class PromptGenerator:
             input_data,
             system_message="",
             chain_of_thought="", 
-            echo="", 
+            echo="",
             examples=None,
             chat=False,
+            save_cached_prompt=False,
+            return_cached_prompt=False
         ):
         """
         Builds the complete prompt using the specified components and configuration.
@@ -165,27 +168,113 @@ class PromptGenerator:
         Returns:
         - str or list: The final formatted prompt, either as a string or a list of chat messages.
         """
-        subprompt_system_message = self.build_subprompt_system_message(system_message)
+
+        # save cache
+        cached_prompt = {
+            "prompt_config": prompt_config,
+            "system_message": system_message,
+            "instruction": instruction,
+            "chain_of_thought": chain_of_thought,
+            "echo": echo,
+            "examples": examples,
+            "chat": chat,
+        }
+        if save_cached_prompt:
+            self.cached_prompt = cached_prompt
+
         subprompt_instruction = self.build_subprompt_instruction(instruction, chain_of_thought, echo)
         subprompt_format = self.build_subprompt_format(prompt_config)
         subprompt_few_shot = self.build_subprompt_few_shot(prompt_config, examples)
         subprompt_input = self.build_subprompt_input(prompt_config, input_data)
+        subprompt_system_message = self.build_subprompt_system_message(system_message)
 
         # Concatenate all prompt components
         prompt = f"{subprompt_instruction}\n\n=======\n\n"
         prompt += f"{subprompt_format}\n\n=======\n\n"
         prompt += f"{subprompt_few_shot}\n\n=======\n\n"
-        prompt += f"{subprompt_input}"
-        
+        prompt = prompt + f"{subprompt_input}"
+
         # Format as chat if chat flag is True
         if chat:
             prompt = [{"role": "system", "content": subprompt_system_message},
                       {"role": "user", "content": prompt}]
         else:
             prompt = f"{subprompt_system_message}\n\n=======\n\n{prompt}"
-
-        self._save_to_library("overall_prompt", prompt)
+        
+        if return_cached_prompt:
+            return prompt, cached_prompt
         return prompt
+
+
+    
+
+    def build_prompt_from_cached_prompt(
+        self, 
+        input_data, 
+        use_saved_cached_prompt=False, 
+        cached_prompt=None
+    ):
+        """
+        Builds the complete prompt using the cached prompt and input
+
+        Parameters:
+        - input_data (dict): Dictionary of input data.
+        - cached_prompt (dict): Cached prompt template containing all other info except input_data.
+
+        Returns:
+        - str or list: The final formatted prompt, either as a string or a list of chat messages.
+        """
+
+        if use_saved_cached_prompt:
+            if self.cached_prompt is None:
+                raise ValueError("No saved cached prompt found")
+            cached_prompt = self.cached_prompt
+        else:
+            if cached_prompt is None:
+                raise ValueError("No cached prompt found")
+            cached_prompt_keys = list(cached_prompt.keys())
+
+        for field in self.prompt_fields:
+            if field not in cached_prompt_keys:
+                raise ValueError(f"Missing key {field} not found in cached_prompt")
+        
+        prompt_config = cached_prompt["prompt_config"]
+        system_message = cached_prompt["system_message"]
+        instruction = cached_prompt["instruction"]
+        chain_of_thought = cached_prompt["chain_of_thought"]
+        echo = cached_prompt["echo"]
+        examples = cached_prompt["examples"]
+        chat = cached_prompt["chat"]
+
+        prompt = self.build_prompt(
+            prompt_config=prompt_config,
+            instruction=instruction,
+            input_data=input_data,
+            system_message=system_message,
+            chain_of_thought=chain_of_thought,
+            echo=echo,
+            examples=examples,
+            chat=chat,
+        )
+
+        return prompt
+        
+
+
+
+    def _save_to_library(self, field, text):
+        """
+        Saves the provided text to the specified field in the prompt library.
+
+        Parameters:
+        - field (str): The field in the library to which the text will be added.
+        - text (str): The text content to add to the specified field.
+        """
+        if field not in self.prompt_library:
+            self.prompt_library[field] = []
+        self.prompt_library[field].append(text)
+        self.prompt_library[field] = list(set(self.prompt_library[field]))
+
     
     def load_library(self, file_path):
         """
@@ -196,6 +285,7 @@ class PromptGenerator:
         """
         with open(file_path, 'r') as f:
             self.prompt_library = json.load(f)
+
 
     def save_library(self, file_path, fields=None):
         """
