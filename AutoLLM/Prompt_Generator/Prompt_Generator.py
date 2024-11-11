@@ -1,4 +1,67 @@
 import json
+from AutoLLM._utils.general import get_attr
+
+
+class Prompt:
+
+    def __init__(
+            self, 
+            system_message, 
+            instruction,
+            input,
+            format="",
+            chain_of_thought="", 
+            echo="", 
+            few_shot_examples="",
+            assistant_guide="",
+            **kwargs,
+        ):
+        """
+        Initializes the Prompt object with various components of the prompt.
+        """
+        self.system_message = system_message
+        self.instruction = instruction
+        self.input = input
+        self.format = format
+        self.chain_of_thought = chain_of_thought
+        self.echo = echo
+        self.few_shot_examples = few_shot_examples
+        self.assistant_guide = assistant_guide
+        self.chat = get_attr(kwargs, 'chat_mode', False)
+        self.continue_final_message = get_attr(kwargs, 'continue_final_message', False),
+    
+
+    def build_prompt(self):
+
+        # Concatenate all prompt components
+        prompt = f"{self.instruction}\n\n=======\n\n"
+        prompt += f"{self.format}\n\n=======\n\n"
+        prompt += f"{self.few_shot_examples}\n\n=======\n\n"
+        prompt += f"{self.input}"
+
+        
+
+        # Format as chat if chat flag is True
+        if self.chat:
+            prompt = [{"role": "system", "content": self.system_message},
+                      {"role": "user", "content": prompt}]
+            if self.continue_final_message:
+                prompt.append({"role": "assistant", "content": self.assistant_guide})
+        else:
+            prompt = f"{self.system_message}\n\n=======\n\n{prompt}"
+            if self.continue_final_message:
+                prompt += f"\n\n{self.assistant_guide}"
+        
+        
+        return prompt
+
+
+
+
+    
+
+
+
 
 class PromptGenerator:
     def __init__(self, library_path="./AutoLLM/Prompt_Generator/default_prompt_library.json"):
@@ -17,6 +80,7 @@ class PromptGenerator:
             "prompt_config"
         ]
     
+
     def build_subprompt_system_message(self, system_message):
         """
         Builds the system message component of the prompt.
@@ -29,6 +93,7 @@ class PromptGenerator:
         """
         self._save_to_library("system_message", system_message)
         return system_message
+
 
     def build_subprompt_instruction(self, instruction, chain_of_thought="", echo=""):
         """
@@ -53,6 +118,7 @@ class PromptGenerator:
         prompt = instruction + chain_of_thought + echo
         return prompt
     
+
     def build_subprompt_format(self, prompt_config):
         """
         Builds the output format component of the prompt based on the prompt configuration.
@@ -70,6 +136,7 @@ class PromptGenerator:
         prompt = prompt[:-2]  # Remove the final newline
         return prompt
     
+
     def build_example_template(self, prompt_config):
         """
         Builds a template function for formatting examples based on the prompt configuration.
@@ -87,13 +154,14 @@ class PromptGenerator:
                 value = example.get(field['name'], "")
                 if value:
                     template += f"{field['name']}: {value}\n\n"
-                elif counter == 1:
-                    template += f"{field['name']}: "
-                    counter = 0
+                # elif counter == 1:
+                #     template += f"{field['name']}: "
+                #     counter = 0
             return template
         
         return example_func
     
+
 
     def build_subprompt_few_shot(self, prompt_config, examples):
         """
@@ -120,6 +188,7 @@ class PromptGenerator:
         self._save_to_library("few_shot_examples", prompt)
         return prompt
     
+
 
     def build_subprompt_input(self, prompt_config, input_data):
         """
@@ -149,8 +218,9 @@ class PromptGenerator:
             echo="",
             examples=None,
             chat=False,
+            assistant_guide=False,
             save_cached_prompt=False,
-            return_cached_prompt=False
+            return_cached_prompt=False,
         ):
         """
         Builds the complete prompt using the specified components and configuration.

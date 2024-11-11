@@ -1,162 +1,190 @@
 import os
 import time
 import torch
-from transformers import (
-    AutoTokenizer,
-    AutoModelForCausalLM,
-    GPTQConfig,
-    pipeline,
-)
-from typing import Optional
+from transformers import AutoTokenizer, AutoModelForCausalLM, GPTQConfig, pipeline
+from AutoLLM._utils.general import get_attr, is_flash_attention_available
+
 
 class Llama3InstructModel:
-    """A class for loading, configuring, and running a LLaMA-3 instruction-following model with optional assistant model support for speculative decoding."""
+    """
+    Class for loading, configuring, and running a LLaMA-3 instruction-following model.
+    Includes support for an assistant model for speculative decoding.
+    """
 
-    def __init__(self, model_directory: str = "model path"):
+    def __init__(self, model_directory: str):
         """
-        Initializes the Llama3InstructModel by listing available LLaMA-3 models in the specified directory.
+        Initialize the Llama3InstructModel by listing available models in the specified directory.
 
         Args:
-            model_directory (str): Directory path containing LLaMA-3 models.
+            model_directory (str): Path to directory containing LLaMA-3 models.
         """
         self.model_directory = model_directory
         self.model = None
         self.tokenizer = None
         self.pipeline = None
         self.assistant_model = None
-        self.quantization_config = GPTQConfig(use_exllama=True, exllama_config={"version": 2})
-        self.device_map = 'auto'
-        
-        # List available LLaMA-3 models in the directory.
-        available_models = [f for f in os.listdir(self.model_directory) if 'llama3' in f]
+
+        # List all available models in the directory with "Llama3" in the name
+        available_models = [f for f in os.listdir(self.model_directory) if 'Llama3' in f]
         print("Available models:", available_models)
 
-    def load_model_from_path(self, model_path: str):
+
+    def load_model_from_path(self, model_path: str, **kwargs):
         """
-        Loads a model and tokenizer from the specified path and configures the pipeline.
+        Load model and tokenizer from a specified path and configure quantization and device settings.
 
         Args:
             model_path (str): Path to the model directory.
-        """
-        self.tokenizer = AutoTokenizer.from_pretrained(model_path)
         
-        self.model = AutoModelForCausalLM.from_pretrained(
-            model_path,
-            device_map=self.device_map,
-            quantization_config=self.quantization_config,
-            torch_dtype=torch.float16,
-            low_cpu_mem_usage=True,
-            trust_remote_code=True,
-            use_safetensors=True,
-            attn_implementation="flash_attention_2",
-        )
-        self.model.generation_config.pad_token_id = self.tokenizer.pad_token_id
-        self._build_pipeline()
-
-    def load_model_from_model(self, model: AutoModelForCausalLM, tokenizer: AutoTokenizer):
+        Returns:
+            Tuple: (model, tokenizer, device_map)
         """
-        Directly loads an existing model and tokenizer and configures the pipeline.
+        full_model_path = os.path.join(self.model_directory, model_path)
+
+        # Initialize tokenizer
+        tokenizer = AutoTokenizer.from_pretrained(full_model_path, use_fast=True)
+
+        # Set up quantization configuration
+        quantization_config = GPTQConfig(
+            bits=get_attr(kwargs, 'bits', 4),
+            use_exllama=get_attr(kwargs, 'use_exllama', True),
+            exllama_config=get_attr(kwargs, 'exllama_config', {"version": 2}),
+        )
+
+        # Configure Flash Attention based on availability
+        flash_attention_version = is_flash_attention_available()
+        if flash_attention_version == 2:
+            kwargs['attn_implementation'] = "flash_attention_2"
+        else:
+            kwargs.pop('attn_implementation', None)
+
+        # Determine device map
+        device_map = get_attr(kwargs, 'device_map', 'cuda:0')
+
+        # Load model with specified configurations
+        model = AutoModelForCausalLM.from_pretrained(
+            full_model_path,
+            device_map=device_map,
+            quantization_config=quantization_config,
+            torch_dtype=get_attr(kwargs, 'torch_dtype', torch.float16),
+            low_cpu_mem_usage=get_attr(kwargs, 'low_cpu_mem_usage', True),
+            trust_remote_code=get_attr(kwargs, 'trust_remote_code', True),
+            use_safetensors=get_attr(kwargs, 'use_safetensors', True),
+            **kwargs,
+        )
+        model.generation_config.pad_token_id = tokenizer.pad_token_id
+
+        return model, tokenizer, device_map
+
+
+    def set_main_model(self, model, tokenizer, device_map):
+        """
+        Set the primary model and tokenizer, then configure the text-generation pipeline.
 
         Args:
-            model (AutoModelForCausalLM): Pre-loaded model instance.
-            tokenizer (AutoTokenizer): Pre-loaded tokenizer instance.
+            model (AutoModelForCausalLM): Loaded model instance.
+            tokenizer (AutoTokenizer): Loaded tokenizer instance.
+            device_map: Device configuration.
         """
         self.model = model
         self.tokenizer = tokenizer
+        self.device_map = device_map
         self._build_pipeline()
 
-    def _build_pipeline(self):
-        """Configures the text-generation pipeline using the loaded model and tokenizer."""
+
+    def _build_pipeline(self, **kwargs):
+        """
+        Create the text-generation pipeline using the main model and tokenizer.
+        """
         self.pipeline = pipeline(
             "text-generation",
             model=self.model,
             tokenizer=self.tokenizer,
             device_map=self.device_map,
-            return_full_text=True,
-            use_fast=True,
+            return_full_text=get_attr(kwargs, 'return_full_text', False),
+            use_fast=get_attr(kwargs, 'use_fast', True),
         )
 
-    def load_assistant_model(self):
-        """Loads an assistant model to support speculative decoding, used as a secondary generation model."""
-        self.assistant_model = AutoModelForCausalLM.from_pretrained(
-            "TheBloke/Llama-2-7B-Chat-GGML",
-            device_map=self.device_map,
-            quantization_config=self.quantization_config,
-            torch_dtype=torch.float16,
-            low_cpu_mem_usage=True,
-            trust_remote_code=True,
-            use_safetensors=True,
-            attn_implementation="flash_attention_2",
-        )
-        self.assistant_model.generation_config.pad_token_id = self.tokenizer.pad_token_id
 
-    def run_with_formatted_prompt(
-            self,
-            formatted_prompt: str,
-            verbose: bool = False,
-            speculative_decoding: bool = False
-        ) -> str:
+    def build_pipeline_from_path(self, model_path: str, **kwargs):
         """
-        Generates text based on a formatted prompt using the primary model or with speculative decoding.
+        Initialize and set up pipeline from a given model path.
 
         Args:
-            formatted_prompt (str): The input prompt formatted for the model.
-            verbose (bool): If True, outputs additional information including generated text and time metrics.
-            speculative_decoding (bool): If True, enables speculative decoding with the assistant model.
+            model_path (str): Path to the model.
+        
+        Returns:
+            pipeline: Configured text-generation pipeline.
+        """
+        model, tokenizer, device_map = self.load_model_from_path(model_path, **kwargs)
+        self.set_main_model(model, tokenizer, device_map)
+        return self.pipeline
+
+
+    def load_assistant_model(self, model_path, **kwargs):
+        """
+        Load an assistant model for speculative decoding support.
+
+        Args:
+            model_path (str): Path to the assistant model.
+        """
+        self.assistant_model, _, _ = self.load_model_from_path(model_path, **kwargs)
+
+
+    def run_with_formatted_prompt(self, formatted_prompt: str, verbose: bool = False,
+                                  speculative_decoding: bool = False, **kwargs) -> str:
+        """
+        Generate text based on a preformatted prompt using the primary model or with speculative decoding.
+
+        Args:
+            formatted_prompt (str): The input prompt for generation.
+            verbose (bool): If True, print additional output info.
+            speculative_decoding (bool): If True, use the assistant model for speculative decoding.
 
         Returns:
-            str: The generated text output from the model.
+            str: Generated text output.
         """
         start_time = time.time()
 
-        if speculative_decoding:
-            if self.assistant_model is None:
-                raise ValueError("Assistant model is not loaded for speculative decoding.")
+        # Run the pipeline with or without speculative decoding
+        outputs = self.pipeline(
+            formatted_prompt,
+            max_new_tokens=get_attr(kwargs, 'max_new_tokens', 1024),
+            temperature=get_attr(kwargs, 'temperature', 0.2),
+            top_p=get_attr(kwargs, 'top_p', 0.95),
+            top_k=get_attr(kwargs, 'top_k', 40),
+            do_sample=get_attr(kwargs, 'do_sample', True),
+            return_full_text=get_attr(kwargs, 'return_full_text', False),
+            add_special_tokens=get_attr(kwargs, 'add_special_tokens', False),
+            continue_final_message=get_attr(kwargs, 'continue_final_message', False),
+            assistant_model=self.assistant_model if speculative_decoding else None,
             
-            outputs = self.pipeline(
-                formatted_prompt,
-                max_new_tokens=1024,
-                temperature=0.2,
-                top_p=0.95,
-                top_k=40,
-                do_sample=True,
-                return_full_text=False,
-                add_special_tokens=False,
-                assistant_model=self.assistant_model,
-            )
-        else:
-            outputs = self.pipeline(
-                formatted_prompt,
-                max_new_tokens=1024,
-                temperature=0.2,
-                top_p=0.95,
-                top_k=40,
-                do_sample=True,
-                return_full_text=False,
-                add_special_tokens=False,
-            )
+        )
 
-        output_text = outputs[0]['generated_text'][len(formatted_prompt):]
+        # Extract output text
+        output_text = outputs[0]['generated_text'][len(formatted_prompt):] if get_attr(kwargs, 'return_full_text', False) else outputs[0]['generated_text']
 
+        # Optionally print verbose information
         if verbose:
             output_tensor = self.tokenizer(output_text, return_tensors='pt')
             elapsed_time = time.time() - start_time
-            print(f"Output: {output_text}")
+            print(f"\nOutput: {output_text}\n")
             print(f"Elapsed Time: {elapsed_time:.2f} seconds")
             print(f"Throughput: {output_tensor['input_ids'].shape[1] / elapsed_time:.2f} tokens/sec")
 
         return output_text
 
+
     def get_default_chat_from_prompt(self, prompt: str, system_message: str) -> list:
         """
-        Creates a default chat structure with system and user messages based on a given prompt.
+        Create a default chat format with system and user messages.
 
         Args:
-            prompt (str): The user's input prompt.
-            system_message (str): The system's contextual message.
+            prompt (str): User's input prompt.
+            system_message (str): System message context.
 
         Returns:
-            list: A list of dictionaries representing chat messages for the system and user.
+            list: Chat messages as a list of dictionaries.
         """
         return [
             {"role": "system", "content": system_message},
@@ -164,3 +192,55 @@ class Llama3InstructModel:
         ]
 
 
+    def get_formatted_prompt_from_chat(self, chat: list) -> str:
+        """
+        Format a chat structure into a string suitable for the model.
+
+        Args:
+            chat (list): Chat messages.
+
+        Returns:
+            str: Formatted prompt string.
+        """
+        print(chat)
+        return self.tokenizer.apply_chat_template(chat, tokenize=False)
+
+
+    def run_with_chat(self, chat: list, verbose: bool = False, speculative_decoding: bool = False, **kwargs):
+        """
+        Generate text based on a chat structure using the primary or assistant model.
+
+        Args:
+            chat (list): Chat messages as a list of dictionaries.
+        """
+        formatted_prompt = self.get_formatted_prompt_from_chat(chat)
+        return self.run_with_formatted_prompt(formatted_prompt, verbose, speculative_decoding, **kwargs)
+
+
+    def get_chat_from_raw_prompt(self, system_message: str, prompt: str) -> list:
+        """
+        Create a chat structure from a raw prompt.
+
+        Args:
+            system_message (str): System message context.
+            prompt (str): User's input prompt.
+
+        Returns:
+            list: Chat messages as a list of dictionaries.
+        """
+        return [
+            {"role": "system", "content": system_message},
+            {"role": "user", "content": prompt},
+        ]
+
+    def run_with_raw_prompt(self, system_message: str, prompt: str, verbose: bool = False,
+                            speculative_decoding: bool = False, **kwargs):
+        """
+        Generate text from a raw prompt with optional speculative decoding.
+
+        Args:
+            system_message (str): System message context.
+            prompt (str): User's input prompt.
+        """
+        chat = self.get_chat_from_raw_prompt(system_message, prompt)
+        return self.run_with_chat(chat, verbose, speculative_decoding, **kwargs)
