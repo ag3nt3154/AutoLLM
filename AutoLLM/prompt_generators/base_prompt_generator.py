@@ -2,82 +2,42 @@ import json
 from AutoLLM._utils.general import get_attr
 
 
-class Prompt:
 
-    def __init__(
-            self, 
-            system_message, 
-            instruction,
-            input,
-            format="",
-            chain_of_thought="", 
-            echo="", 
-            few_shot_examples="",
-            assistant_guide="",
-            **kwargs,
-        ):
-        """
-        Initializes the Prompt object with various components of the prompt.
-        """
-        self.system_message = system_message
-        self.instruction = instruction
-        self.input = input
-        self.format = format
-        self.chain_of_thought = chain_of_thought
-        self.echo = echo
-        self.few_shot_examples = few_shot_examples
-        self.assistant_guide = assistant_guide
-        self.chat = get_attr(kwargs, 'chat_mode', False)
-        self.continue_final_message = get_attr(kwargs, 'continue_final_message', False),
-    
-
-    def build_prompt(self):
-
-        # Concatenate all prompt components
-        prompt = f"{self.instruction}\n\n=======\n\n"
-        prompt += f"{self.format}\n\n=======\n\n"
-        prompt += f"{self.few_shot_examples}\n\n=======\n\n"
-        prompt += f"{self.input}"
-
-        
-
-        # Format as chat if chat flag is True
-        if self.chat:
-            prompt = [{"role": "system", "content": self.system_message},
-                      {"role": "user", "content": prompt}]
-            if self.continue_final_message:
-                prompt.append({"role": "assistant", "content": self.assistant_guide})
-        else:
-            prompt = f"{self.system_message}\n\n=======\n\n{prompt}"
-            if self.continue_final_message:
-                prompt += f"\n\n{self.assistant_guide}"
-        
-        
-        return prompt
-
-
-
-
-    
-
-
-
-
-class PromptGenerator:
+class BasePromptGenerator:
     def __init__(self, library_path="./AutoLLM/Prompt_Generator/default_prompt_library.json"):
         """
         Initializes the PromptGenerator by loading the default prompt library from a JSON file.
         """
         self.load_library(library_path)
-        self.cached_prompt = None
-        self.prompt_fields = [
-            "system_message",
-            "instruction",
-            "chain_of_thought",
+        self.required_fields = [
+            "instruction", 
+            "input", 
+            "format"
+        ]
+        self.optional_fields = [
+            "system_message", 
+            "chain_of_thought", 
             "echo",
-            "examples",
-            "chat",
-            "prompt_config"
+            "few_shot_examples", 
+            "assistant_guide", 
+            "separator",
+        ]
+    
+    def build_components_from_args:
+    
+        self.cached_prompt = None
+        self.required_fields = [
+            "instruction", 
+            "input", 
+            "format"
+        ]
+        self.optional_fields = [
+            "system_message", 
+            "chain_of_thought", 
+            "echo",
+            "few_shot_examples", 
+            "assistant_guide", 
+            "separator",
         ]
     
 
