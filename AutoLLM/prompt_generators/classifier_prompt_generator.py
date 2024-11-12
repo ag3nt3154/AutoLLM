@@ -5,8 +5,8 @@ from AutoLLM.prompts.default_prompt import DefaultPrompt
 
 class ClassifierPromptGenerator(BasePromptGenerator):
 
-    def __init__(self, library_path="./AutoLLM/Prompt_Generator/default_prompt_library.json"):
-        super().__init__(library_path)
+    def __init__(self):
+        super().__init__()
 
 
     def load_config(self, config):

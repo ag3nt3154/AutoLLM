@@ -4,27 +4,35 @@ from AutoLLM._utils.general import get_attr
 
 
 class BasePromptGenerator:
-    def __init__(self, library_path="./AutoLLM/Prompt_Generator/default_prompt_library.json"):
-        """
-        Initializes the PromptGenerator by loading the default prompt library from a JSON file.
-        """
-        self.load_library(library_path)
-        self.required_fields = [
-            "instruction", 
-            "input", 
-            "format"
-        ]
-        self.optional_fields = [
-            "system_message", 
-            "chain_of_thought", 
-            "echo",
-            "few_shot_examples", 
-            "assistant_guide", 
-            "separator",
-        ]
+    def __init__(self):
+        self.config = None
+
+        self.instruction = None
+        self.input_text = None
+        self.format = None
+        self.system_message = None
+        self.few_shot_examples = None
+        self.guide = None
+        pass
+        
+
+    def load_library(self, file_path="./AutoLLM/prompt_generators/default_prompt_library.json"):
+        
+        # check if the file_path is a json file
+        if not file_path.endswith(".json"):
+            raise ValueError("file_path must be a json file")
+        
+        # save the prompt cache to a json file
+        with open(file_path, "w") as f:
+            json.dump(self.prompt_library, f)
     
-    def build_components(self, prompt_config):
-        return None
+
+
+
+
+
+
+
     #     self.cached_prompt = None
     #     self.required_fields = [
     #         "instruction", 
