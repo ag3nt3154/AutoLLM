@@ -1,11 +1,17 @@
 import json
 from AutoLLM._utils.general import get_attr
+from AutoLLM.prompts.base_prompt import BasePrompt
+from AutoLLM.prompts.sample_subprompt import SampleSubPrompt
 
 
 
 class BasePromptGenerator:
     def __init__(self):
         self.config = None
+        self.prompt_library = None
+        self.prompt_cache = []
+        self.sample_subprompt = SampleSubPrompt()
+        self.base_prompt = BasePrompt()
 
         self.instruction = None
         self.input_text = None
@@ -13,11 +19,15 @@ class BasePromptGenerator:
         self.system_message = None
         self.few_shot_examples = None
         self.guide = None
+
+        
         pass
         
 
     def load_library(self, file_path="./AutoLLM/prompt_generators/default_prompt_library.json"):
-        
+        """
+        Load prompt library from path
+        """
         # check if the file_path is a json file
         if not file_path.endswith(".json"):
             raise ValueError("file_path must be a json file")
@@ -26,6 +36,137 @@ class BasePromptGenerator:
         with open(file_path, "w") as f:
             json.dump(self.prompt_library, f)
     
+
+    def load_config(self, config):
+        """
+        Loads the configuration for the prompt generator.
+
+        Args:
+        config (dict): A dictionary containing the configuration for the prompt generator.
+                        The dictionary should have the following structure:
+            {
+                "sample_subprompt": config_for_sample_subprompt,
+                ...
+            }
+        """
+        self.config = config
+        self.sample_subprompt.load_config(self.config["sample_subprompt"])
+        self.chat = get_attr(self.config, "chat", False)
+        self.separator = get_attr(self.config, "separator", "\n\n=====\n\n")
+        
+    
+
+    def load_tokenizer(self, tokenizer):
+        """
+        Loads the tokenizer for the prompt generator.
+        """
+
+        self.tokenizer = tokenizer
+        self.base_prompt.load_tokenizer(self.tokenizer)
+    
+
+    def build_component_instruction(self, instruction: str, chain_of_thought: str="", echo: str=""):
+        """
+        Builds the instruction component of the prompt.
+
+        Args:
+        instruction (str): The main instruction for the prompt.
+        chain_of_thought (str, optional): Additional context or thought process.
+        echo (str, optional): Additional information to echo.
+
+        Returns:
+        str: The built instruction.
+        """
+        if chain_of_thought:
+            instruction += f" {chain_of_thought}"
+        if echo:
+            instruction += f" {echo}"
+        
+        self.instruction = instruction
+        return self.instruction
+    
+
+    def build_component_input_text(self, input_data: dict):
+        """
+        Builds the input text component of the prompt.
+        Args:
+        input_data (dict): A dictionary containing the input data for the prompt.
+        Returns:
+        str: The built input text.
+        """
+        self.input_text = self.sample_subprompt.build_input(input_data)
+        return self.input_text
+    
+
+    def build_component_format(self):
+        """
+        Builds the format component of the prompt.
+
+        Args:
+        format_config (dict): A dictionary containing the configuration for the format.
+        Returns:
+        str: The built format.
+        """
+        self.format = self.sample_subprompt.build_format()
+        return self.format
+    
+
+    def build_component_system_message(self, system_message: str):
+        """
+        Builds the system message component of the prompt.
+
+        Args:
+        system_message (str): The system message for the prompt.
+        Returns:
+        str: The built system message.
+        """
+        self.system_message = system_message
+        return self.system_message
+    
+
+    def build_component_few_shot_examples(self, few_shot_examples: list, require_all_fields=True):
+        """
+        Builds the few-shot examples component of the prompt.
+
+        Args:
+        few_shot_examples (list): A list of dictionaries containing the few-shot examples.
+        Returns:
+        str: The built few-shot examples.
+        """
+        self.few_shot_examples = self.sample_subprompt.build_multiple_examples(few_shot_examples, require_all_fields)
+        return self.few_shot_examples
+    
+
+    def build_component_guide(self):
+        """
+        Builds the guide component of the prompt.
+
+        """
+        if self.sample_subprompt.guide is None:
+            raise ValueError("Guide is build with input. Run build_input_text first.")
+        self.guide = self.sample_subprompt.guide
+        return self.guide
+    
+
+    def build_prompt(self):
+        """
+        Builds the prompt based on the provided prompt name.
+        """
+
+        
+        prompt = self.base_prompt.build_prompt_from_args(
+            instruction=self.instruction,
+            input_text=self.input_text,
+            format=self.format,
+            system_message=self.system_message,
+            few_shot_examples=self.few_shot_examples,
+            guide=self.guide,
+            separator=self.separator,
+            chat=self.chat,
+        )
+
+        return prompt
+
 
 
 
@@ -314,15 +455,7 @@ class BasePromptGenerator:
     #     self.prompt_library[field] = list(set(self.prompt_library[field]))
 
     
-    def load_library(self, file_path):
-        """
-        Loads the prompt library from a specified JSON file.
-
-        Parameters:
-        - file_path (str): The path to the JSON file to load.
-        """
-        with open(file_path, 'r') as f:
-            self.prompt_library = json.load(f)
+    
 
 
     # def save_library(self, file_path, fields=None):

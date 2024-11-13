@@ -185,7 +185,7 @@ class BasePrompt:
                 prompt = system_message + separator
             prompt += body_prompt
             if guide:
-                prompt += separator + guide
+                prompt += guide
             
         else:
             # check that tokenizer is set if chat is True
@@ -211,7 +211,7 @@ class BasePrompt:
         Build the complete prompt by concatenating its components.
         """
 
-        self.load_cache(prompt_cache, tokenizer)
+        self.load_cache(prompt_cache)
         instruction = self.prompt_cache["instruction"]
         input_text = self.prompt_cache["input_text"]
         format = self.prompt_cache["format"]
@@ -264,11 +264,12 @@ class BasePrompt:
         Returns:
             str: The built prompt.
         """  
-        prompt = f"{instruction}"
+        prompt = instruction
         prompt += separator
-        prompt += f"{format}"
-        prompt += separator
-        prompt += f"{few_shot_examples}"
+        prompt += f"{format}"  
+        if few_shot_examples:
+            prompt += separator
+            prompt += f"{few_shot_examples}"
         prompt += separator
         prompt += f"{input_text}"
 
