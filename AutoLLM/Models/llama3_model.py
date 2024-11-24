@@ -131,8 +131,13 @@ class Llama3InstructModel:
         self.assistant_model, _, _ = self.load_model_from_path(model_path, **kwargs)
 
 
-    def run_with_formatted_prompt(self, formatted_prompt: str, verbose: bool = False,
-                                  speculative_decoding: bool = False, **kwargs) -> str:
+    def run_with_formatted_prompt(
+        self, 
+        formatted_prompt: str, 
+        verbose: bool = False,
+        speculative_decoding: bool = False, 
+        **kwargs
+    ) -> str:
         """
         Generate text based on a preformatted prompt using the primary model or with speculative decoding.
 
@@ -175,23 +180,6 @@ class Llama3InstructModel:
         return output_text
 
 
-    def get_default_chat_from_prompt(self, prompt: str, system_message: str) -> list:
-        """
-        Create a default chat format with system and user messages.
-
-        Args:
-            prompt (str): User's input prompt.
-            system_message (str): System message context.
-
-        Returns:
-            list: Chat messages as a list of dictionaries.
-        """
-        return [
-            {"role": "system", "content": system_message},
-            {"role": "user", "content": prompt},
-        ]
-
-
     def get_formatted_prompt_from_chat(self, chat: list) -> str:
         """
         Format a chat structure into a string suitable for the model.
@@ -206,41 +194,3 @@ class Llama3InstructModel:
         return self.tokenizer.apply_chat_template(chat, tokenize=False)
 
 
-    def run_with_chat(self, chat: list, verbose: bool = False, speculative_decoding: bool = False, **kwargs):
-        """
-        Generate text based on a chat structure using the primary or assistant model.
-
-        Args:
-            chat (list): Chat messages as a list of dictionaries.
-        """
-        formatted_prompt = self.get_formatted_prompt_from_chat(chat)
-        return self.run_with_formatted_prompt(formatted_prompt, verbose, speculative_decoding, **kwargs)
-
-
-    def get_chat_from_raw_prompt(self, system_message: str, prompt: str) -> list:
-        """
-        Create a chat structure from a raw prompt.
-
-        Args:
-            system_message (str): System message context.
-            prompt (str): User's input prompt.
-
-        Returns:
-            list: Chat messages as a list of dictionaries.
-        """
-        return [
-            {"role": "system", "content": system_message},
-            {"role": "user", "content": prompt},
-        ]
-
-    def run_with_raw_prompt(self, system_message: str, prompt: str, verbose: bool = False,
-                            speculative_decoding: bool = False, **kwargs):
-        """
-        Generate text from a raw prompt with optional speculative decoding.
-
-        Args:
-            system_message (str): System message context.
-            prompt (str): User's input prompt.
-        """
-        chat = self.get_chat_from_raw_prompt(system_message, prompt)
-        return self.run_with_chat(chat, verbose, speculative_decoding, **kwargs)
