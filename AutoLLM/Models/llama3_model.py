@@ -25,7 +25,7 @@ class Llama3InstructModel:
         self.assistant_model = None
 
         # List all available models in the directory with "Llama3" in the name
-        available_models = [f for f in os.listdir(self.model_directory) if 'Llama3' in f]
+        available_models = [f for f in os.listdir(self.model_directory) if 'llama3' in f.lower()]
         print("Available models:", available_models)
 
 
