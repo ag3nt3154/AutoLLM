@@ -17,6 +17,13 @@ class SampleConfig(BaseModel):
         description="A list of configuration items, each with 'name' and 'description'."
     )
 
+    def build_format_prompt(self):
+        text = "Format:\n"
+        for item in self.configs:
+            text += f"{item.name}: {item.description}\n\n"
+        text.strip('\n')
+        return text
+
 
 class SampleItem:
 

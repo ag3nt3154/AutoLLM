@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
 def get_attr(config, key, default_val):
     """
@@ -83,3 +84,29 @@ def create_folder(folder_path):
     except FileExistsError:
         pass
     return
+
+
+
+
+
+def split_dataframe(df, test_size=0.2, random_state=None, stratify_col=None):
+    """
+    Splits a DataFrame into training and testing sets.
+
+    Parameters:
+        df (pd.DataFrame): The input DataFrame to be split.
+        test_size (float): Proportion of the dataset to include in the test split (default is 0.2).
+        random_state (int): Seed used by the random number generator (default is None).
+        stratify_col (str): Column to stratify by for stratified sampling (default is None).
+
+    Returns:
+        pd.DataFrame, pd.DataFrame: Training and testing DataFrames.
+    """
+    stratify = df[stratify_col] if stratify_col else None
+    train_df, test_df = train_test_split(
+        df,
+        test_size=test_size,
+        random_state=random_state,
+        stratify=stratify
+    )
+    return train_df, test_df

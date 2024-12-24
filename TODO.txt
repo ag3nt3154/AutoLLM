@@ -1,0 +1,6 @@
+TODO:
+
+- simple naive classification
+- classification with chain of thought
+- classification with few shot
+- classification with chain of thought and few-shot

@@ -9,11 +9,12 @@ class FewShotSamples(BaseModel):
 
 
     def build_prompt(self):
-        prompt = ""
+        prompt = "Examples:\n\n"
         for sample in self.samples:
             for field in sample.field_names:
-                prompt += f"{field}: {sample[field]}\n\n"
+                prompt += f"{field}: {sample.data[field]}\n\n"
             prompt += "\n"
+        prompt.strip('\n')
         return prompt
     
 

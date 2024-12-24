@@ -12,11 +12,12 @@ class InputSample(BaseModel):
         arbitrary_types_allowed = True
 
     def build_input_prompt(self):
-        prompt = ""
+        prompt = "Input:\n\n"
         for field in self.input_sample.field_names:
             text = self.input_sample.data[field]
             if text:
                 prompt += f"{field}: {text}\n\n" 
+        prompt.strip('\n')
         return prompt
     
 
@@ -26,4 +27,6 @@ class InputSample(BaseModel):
             text = self.input_sample.data[field]
             if not text:
                 prompt += f"{field}:" 
+                break
+        prompt.strip('\n')
         return prompt
