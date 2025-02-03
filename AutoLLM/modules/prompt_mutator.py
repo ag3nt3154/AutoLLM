@@ -23,31 +23,33 @@ class PromptMutator:
         self.api_client = api_client
         self.mutation_template = mutation_instruction_template
         self.thinking_styles = thinking_styles
+        self.api_client.load_json_schema(PromptMutatorSchema)
 
     def mutate_prompt(
         self,
         seed_prompt: str,
         task_description: str,
         num_variations: int = 5,
-        temperature: float = 0.7
     ) -> List[str]:
         """
         Generate mutated prompts using different thinking styles
         """
         system_prompt = "You are a prompt engineering expert. Generate variations of the given prompt."
-        
+        thinking_styles = [f"- {f}" for f in random.sample(self.thinking_styles, num_variations)]
         user_prompt = self.mutation_template.format(
             task_description=task_description,
             seed_instruction=seed_prompt,
-            thinking_styles="\n".join(random.sample(self.thinking_styles, num_variations)),
+            thinking_styles="\n".join(thinking_styles),
             num_variations=num_variations,
         )
 
-
+        
         response = self.api_client.chat_completion(
-            system_prompt=system_prompt,
-            user_prompt=user_prompt,
-            temperature=temperature
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+                {"role": "assistant", "content": '{"thinking": '},
+            ],
         )
 
         return self._parse_mutations(response)
@@ -56,7 +58,9 @@ class PromptMutator:
         """Extract mutated prompts from LLM response"""
         try:
             llm_response = json.loads(llm_response)
+            print("LLM thinking:", llm_response['thinking'])
             return llm_response['mutated_instructions']
         except json.JSONDecodeError:
             print("Failed to parse LLM response. Returning empty list.")
+            print("LLM responsee:", llm_response)
             return []
