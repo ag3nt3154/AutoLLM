@@ -1,6 +1,7 @@
 import os
 from openai import OpenAI
 from pydantic import BaseModel
+import json
 
 
 class APIClient:
@@ -35,11 +36,15 @@ class APIClient:
             "guided_json": self.json_schema.model_json_schema()
         }
 
-    def chat_completion(self, messages: list):
-        response = self.client.chat_completions.create(
+    def chat_completion(self, messages: list, return_text=True):
+        response = self.client.chat.completions.create(
             model=self.model,
             messages=messages,
             **self.generation_config,
         )
 
-        return response.to_json()
+        response = json.loads(response.to_json())
+
+        if return_text:
+            response = response['choices'][0]['message']['content']
+        return response

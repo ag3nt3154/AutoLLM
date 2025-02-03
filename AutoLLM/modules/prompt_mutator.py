@@ -5,6 +5,13 @@ from AutoLLM.prompts.thinking_styles import thinking_styles
 from AutoLLM.prompts.mutation_instructions import mutation_instruction_template
 import random
 import json
+from pydantic import BaseModel
+
+
+class PromptMutatorSchema(BaseModel):
+    thinking: str
+    mutated_instructions: List[str]
+
 
 class PromptMutator:
     """Handles prompt mutation using different thinking styles"""
