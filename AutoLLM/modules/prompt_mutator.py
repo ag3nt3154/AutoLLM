@@ -42,7 +42,7 @@ class PromptMutator:
             thinking_styles="\n".join(thinking_styles),
             num_variations=num_variations,
         )
-
+        print(user_prompt)
         
         response = self.api_client.chat_completion(
             messages=[

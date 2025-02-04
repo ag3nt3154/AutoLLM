@@ -7,10 +7,11 @@ Given a task description and a seed task instruction used for an agent to comple
 
 Steps:
 - Analyze the task description and the seed task instruction. Think about how the seed task instruction accomplishes the task described.
-- Consider the following thinking styles and apply them to the seed task instruction. Analyze how the seed task instruction may be improved by applying the thinking styles.
-- Generate {num_variations} mutated instructions from the seed task instruction by applying the thinking styles. You should interpret the seed task instruction through the lens of each thinking style and generate mutated instructions that reflects the unique perspective, tone, or approach of that thinking style.
+- Consider the following thinking styles and apply them to the seed task instruction. For each thinking style, thinking about how the seed task instruction may be improved by applying the thinking style.
+- Generate {num_variations} mutated instructions from the seed task instruction by applying each thinking styles.
 - You may dynamically mix thinking styles to create more diverse variations.
-- You must generate mutated instructions that keep similar semantic meaning as the original seed task instruction and are able to accomplish the task described in the task description.
+- You must generate mutated instructions that keep similar semantic meaning as the original seed task instruction.
+- You must generate mutated instructions that can be used to instruct an agent to accomplish the task described in the task description.
 
 [Thinking Styles]: 
 {thinking_styles}
