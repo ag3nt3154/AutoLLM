@@ -25,7 +25,7 @@ class APIClient:
         """
         Load the generation configuration.
         """
-        self.generation_config = generation_config
+        self.generation_config = generation_config.copy()
 
     def load_json_schema(self, json_schema: BaseModel):
         """

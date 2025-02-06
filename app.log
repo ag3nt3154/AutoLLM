@@ -1,0 +1,925 @@
+2025-02-06 14:50:41,071 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'json_data': {'messages': [{'role': 'system', 'content': "You are an information scientist with a specialization in data analysis and categorization, particularly within the domains of retail and library science. Your expertise lies in parsing and analyzing text for keywords and accurately categorizing items based on their descriptions. You have extensive experience in identifying and organizing items into predefined categories such as 'Household', 'Books', 'Clothing & Accessories', and 'Electronics'. Your skills are highly valuable in ensuring that items are correctly labeled, making it easier for users to find what they are looking for. You are adept at using sophisticated analytical tools and your deep understanding of each category allows you to make informed decisions about how to best classify items."}, {'role': 'user', 'content': 'Instructions:\n["List of ideas: Consider the following steps: analyze the text for keywords, compare the description with known items in each category, and then label the item as one of the following: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\']."]\n\nReturn your output in a json object with the following fields according to the format below. You must not return anything else besides the json object.\n\n----------------\nOutput format:\nlabel: (Literal) Return one of the choices from the following list: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\'].\n----------------\nInput:\nPigeon Popcorn Maker, 1200watts, Yellow No movie marathon is complete without a bowl of popcorn. Bring home the Pigeon Popcorn Maker and make delicious and fresh popcorn easily.\n'}, {'role': 'assistant', 'content': '{"label": '}], 'model': 'meta-llama/Llama-3.2-3B-Instruct', 'temperature': 1e-10, 'top_p': 1e-10}, 'extra_json': {'guided_json': {'properties': {'label': {'title': 'Label', 'type': 'string'}}, 'required': ['label'], 'title': 'classifier_schema', 'type': 'object'}}}
+2025-02-06 14:50:41,074 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions
+2025-02-06 14:50:41,074 - httpcore.connection - DEBUG - close.started
+2025-02-06 14:50:41,082 - httpcore.connection - DEBUG - close.complete
+2025-02-06 14:50:41,084 - httpcore.connection - DEBUG - connect_tcp.started host='api.studio.nebius.ai' port=443 local_address=None timeout=5.0 socket_options=None
+2025-02-06 14:50:41,407 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x0000020474608260>
+2025-02-06 14:50:41,412 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x0000020474304950> server_hostname='api.studio.nebius.ai' timeout=5.0
+2025-02-06 14:50:41,718 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x0000020474609040>
+2025-02-06 14:50:41,724 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-06 14:50:41,728 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-06 14:50:41,728 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-06 14:50:41,737 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-06 14:50:41,740 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-06 14:50:42,225 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 06 Feb 2025 06:50:41 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'560'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'600'), (b'x-ratelimit-limit-tokens', b'400000'), (b'x-ratelimit-remaining-requests', b'600'), (b'x-ratelimit-remaining-tokens', b'400000'), (b'Strict-Transport-Security', b'max-age=15724800; includeSubDomains')])
+2025-02-06 14:50:42,231 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:50:42,237 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-06 14:50:42,239 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-06 14:50:42,243 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-06 14:50:42,246 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-06 14:50:42,253 - openai._base_client - DEBUG - HTTP Response: POST https://api.studio.nebius.ai/v1/chat/completions "200 OK" Headers({'date': 'Thu, 06 Feb 2025 06:50:41 GMT', 'content-type': 'application/json', 'content-length': '560', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '600', 'x-ratelimit-limit-tokens': '400000', 'x-ratelimit-remaining-requests': '600', 'x-ratelimit-remaining-tokens': '400000', 'strict-transport-security': 'max-age=15724800; includeSubDomains'})
+2025-02-06 14:50:42,260 - openai._base_client - DEBUG - request_id: None
+2025-02-06 14:50:42,298 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'json_data': {'messages': [{'role': 'system', 'content': "You are an information scientist with a specialization in data analysis and categorization, particularly within the domains of retail and library science. Your expertise lies in parsing and analyzing text for keywords and accurately categorizing items based on their descriptions. You have extensive experience in identifying and organizing items into predefined categories such as 'Household', 'Books', 'Clothing & Accessories', and 'Electronics'. Your skills are highly valuable in ensuring that items are correctly labeled, making it easier for users to find what they are looking for. You are adept at using sophisticated analytical tools and your deep understanding of each category allows you to make informed decisions about how to best classify items."}, {'role': 'user', 'content': 'Instructions:\n["List of ideas: Consider the following steps: analyze the text for keywords, compare the description with known items in each category, and then label the item as one of the following: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\']."]\n\nReturn your output in a json object with the following fields according to the format below. You must not return anything else besides the json object.\n\n----------------\nOutput format:\nlabel: (Literal) Return one of the choices from the following list: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\'].\n----------------\nInput:\nboAt BassHeads 225 in-Ear Super Extra Bass Headphones (Black) Colour:Black   boAt BassHeads 225 polished metal earphones are designed to give you an experience which no other brand can match. It has an incredible sonic clarity with "Super Extra Bass". It is not a plastic earphone - It is polished metal. With tangle free flat cables, you are expected to be hassle free. As the headphones feature 10mm drivers, they give you clear sound with that thumping bass. In-built noise cancelling mic ensures you don\'t miss those important calls. With colors that match your style in your day, the boAt earphones are the ideal choice for anyone who can carry that attitude. Just plug them in and plug into nirvana. boAt contact_us on : [ 02242102403 ]\n'}, {'role': 'assistant', 'content': '{"label": '}], 'model': 'meta-llama/Llama-3.2-3B-Instruct', 'temperature': 1e-10, 'top_p': 1e-10}, 'extra_json': {'guided_json': {'properties': {'label': {'title': 'Label', 'type': 'string'}}, 'required': ['label'], 'title': 'classifier_schema', 'type': 'object'}}}
+2025-02-06 14:50:42,304 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions
+2025-02-06 14:50:42,315 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-06 14:50:42,325 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-06 14:50:42,329 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-06 14:50:42,336 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-06 14:50:42,338 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-06 14:50:43,148 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 06 Feb 2025 06:50:42 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'562'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'600'), (b'x-ratelimit-limit-tokens', b'400000'), (b'x-ratelimit-remaining-requests', b'600'), (b'x-ratelimit-remaining-tokens', b'400000'), (b'Strict-Transport-Security', b'max-age=15724800; includeSubDomains')])
+2025-02-06 14:50:43,148 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:50:43,154 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-06 14:50:43,159 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-06 14:50:43,165 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-06 14:50:43,168 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-06 14:50:43,174 - openai._base_client - DEBUG - HTTP Response: POST https://api.studio.nebius.ai/v1/chat/completions "200 OK" Headers({'date': 'Thu, 06 Feb 2025 06:50:42 GMT', 'content-type': 'application/json', 'content-length': '562', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '600', 'x-ratelimit-limit-tokens': '400000', 'x-ratelimit-remaining-requests': '600', 'x-ratelimit-remaining-tokens': '400000', 'strict-transport-security': 'max-age=15724800; includeSubDomains'})
+2025-02-06 14:50:43,178 - openai._base_client - DEBUG - request_id: None
+2025-02-06 14:50:43,214 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'json_data': {'messages': [{'role': 'system', 'content': "You are an information scientist with a specialization in data analysis and categorization, particularly within the domains of retail and library science. Your expertise lies in parsing and analyzing text for keywords and accurately categorizing items based on their descriptions. You have extensive experience in identifying and organizing items into predefined categories such as 'Household', 'Books', 'Clothing & Accessories', and 'Electronics'. Your skills are highly valuable in ensuring that items are correctly labeled, making it easier for users to find what they are looking for. You are adept at using sophisticated analytical tools and your deep understanding of each category allows you to make informed decisions about how to best classify items."}, {'role': 'user', 'content': 'Instructions:\n["List of ideas: Consider the following steps: analyze the text for keywords, compare the description with known items in each category, and then label the item as one of the following: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\']."]\n\nReturn your output in a json object with the following fields according to the format below. You must not return anything else besides the json object.\n\n----------------\nOutput format:\nlabel: (Literal) Return one of the choices from the following list: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\'].\n----------------\nInput:\nPrestige PIC 3.1 V3 2000-Watt Induction Cooktop with Touch Panel (Black) Style:PIC 3.1 V3 2000-Watt Induction Cooktop with Touch panel   The innovative Prestige Induction Cook-Top offers quick and consistent heating at highest efficiency. Add to this its anti-magnetic wall, soft touch buttons, durability, safety and elegance makes cooking a pleasing and enjoyable experience. The Prestige Induction Cook-Top comes with the unique whistle counter, power saver technology and keep warm function wherein the Induction Cook-Top dynamically monitors the temperature of the vessel and adjusts the power level based on the size (base diameter) of the vessel. The dual heat sensor provided in the Induction Cook-Top automatically senses the temperature of the vessel and prevents over heating thereby saving power. With latest technology and features, this cooktop will be the best addition to your kitchen!\n'}, {'role': 'assistant', 'content': '{"label": '}], 'model': 'meta-llama/Llama-3.2-3B-Instruct', 'temperature': 1e-10, 'top_p': 1e-10}, 'extra_json': {'guided_json': {'properties': {'label': {'title': 'Label', 'type': 'string'}}, 'required': ['label'], 'title': 'classifier_schema', 'type': 'object'}}}
+2025-02-06 14:50:43,223 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions
+2025-02-06 14:50:43,229 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-06 14:50:43,238 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-06 14:50:43,245 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-06 14:50:43,253 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-06 14:50:43,258 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-06 14:50:43,594 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 06 Feb 2025 06:50:42 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'562'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'600'), (b'x-ratelimit-limit-tokens', b'400000'), (b'x-ratelimit-remaining-requests', b'600'), (b'x-ratelimit-remaining-tokens', b'400000'), (b'Strict-Transport-Security', b'max-age=15724800; includeSubDomains')])
+2025-02-06 14:50:43,602 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:50:43,606 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-06 14:50:43,613 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-06 14:50:43,613 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-06 14:50:43,621 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-06 14:50:43,625 - openai._base_client - DEBUG - HTTP Response: POST https://api.studio.nebius.ai/v1/chat/completions "200 OK" Headers({'date': 'Thu, 06 Feb 2025 06:50:42 GMT', 'content-type': 'application/json', 'content-length': '562', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '600', 'x-ratelimit-limit-tokens': '400000', 'x-ratelimit-remaining-requests': '600', 'x-ratelimit-remaining-tokens': '400000', 'strict-transport-security': 'max-age=15724800; includeSubDomains'})
+2025-02-06 14:50:43,629 - openai._base_client - DEBUG - request_id: None
+2025-02-06 14:50:43,666 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'json_data': {'messages': [{'role': 'system', 'content': "You are an information scientist with a specialization in data analysis and categorization, particularly within the domains of retail and library science. Your expertise lies in parsing and analyzing text for keywords and accurately categorizing items based on their descriptions. You have extensive experience in identifying and organizing items into predefined categories such as 'Household', 'Books', 'Clothing & Accessories', and 'Electronics'. Your skills are highly valuable in ensuring that items are correctly labeled, making it easier for users to find what they are looking for. You are adept at using sophisticated analytical tools and your deep understanding of each category allows you to make informed decisions about how to best classify items."}, {'role': 'user', 'content': 'Instructions:\n["List of ideas: Consider the following steps: analyze the text for keywords, compare the description with known items in each category, and then label the item as one of the following: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\']."]\n\nReturn your output in a json object with the following fields according to the format below. You must not return anything else besides the json object.\n\n----------------\nOutput format:\nlabel: (Literal) Return one of the choices from the following list: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\'].\n----------------\nInput:\nThink & Grow Rich - Lectures by Napoleon Hill [MP3]\n'}, {'role': 'assistant', 'content': '{"label": '}], 'model': 'meta-llama/Llama-3.2-3B-Instruct', 'temperature': 1e-10, 'top_p': 1e-10}, 'extra_json': {'guided_json': {'properties': {'label': {'title': 'Label', 'type': 'string'}}, 'required': ['label'], 'title': 'classifier_schema', 'type': 'object'}}}
+2025-02-06 14:50:43,674 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions
+2025-02-06 14:50:43,677 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-06 14:50:43,683 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-06 14:50:43,693 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-06 14:50:43,700 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-06 14:50:43,703 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-06 14:50:44,060 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 06 Feb 2025 06:50:43 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'556'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'600'), (b'x-ratelimit-limit-tokens', b'400000'), (b'x-ratelimit-remaining-requests', b'600'), (b'x-ratelimit-remaining-tokens', b'400000'), (b'Strict-Transport-Security', b'max-age=15724800; includeSubDomains')])
+2025-02-06 14:50:44,070 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:50:44,076 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-06 14:50:44,076 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-06 14:50:44,087 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-06 14:50:44,092 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-06 14:50:44,096 - openai._base_client - DEBUG - HTTP Response: POST https://api.studio.nebius.ai/v1/chat/completions "200 OK" Headers({'date': 'Thu, 06 Feb 2025 06:50:43 GMT', 'content-type': 'application/json', 'content-length': '556', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '600', 'x-ratelimit-limit-tokens': '400000', 'x-ratelimit-remaining-requests': '600', 'x-ratelimit-remaining-tokens': '400000', 'strict-transport-security': 'max-age=15724800; includeSubDomains'})
+2025-02-06 14:50:44,102 - openai._base_client - DEBUG - request_id: None
+2025-02-06 14:50:44,148 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'json_data': {'messages': [{'role': 'system', 'content': "You are an information scientist with a specialization in data analysis and categorization, particularly within the domains of retail and library science. Your expertise lies in parsing and analyzing text for keywords and accurately categorizing items based on their descriptions. You have extensive experience in identifying and organizing items into predefined categories such as 'Household', 'Books', 'Clothing & Accessories', and 'Electronics'. Your skills are highly valuable in ensuring that items are correctly labeled, making it easier for users to find what they are looking for. You are adept at using sophisticated analytical tools and your deep understanding of each category allows you to make informed decisions about how to best classify items."}, {'role': 'user', 'content': 'Instructions:\n["List of ideas: Consider the following steps: analyze the text for keywords, compare the description with known items in each category, and then label the item as one of the following: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\']."]\n\nReturn your output in a json object with the following fields according to the format below. You must not return anything else besides the json object.\n\n----------------\nOutput format:\nlabel: (Literal) Return one of the choices from the following list: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\'].\n----------------\nInput:\nDeckUp Meritus-S Wall TV Unit (Dark Wenge, Matte Finish) Color:Dark Wenge   Assembly Required: The Product Requires Basic Assembly And Comes With Diy (Do-It-Yourself) Assembly Instructions.Product Dimensions: Length (30 Inches), Width (12 Inches), Height (11 Inches).Primary Material: Engineered Wood With Melamine Laminate.Color: Dark Wenge, Finish: Matte Finish, Style: Contemporary.\n'}, {'role': 'assistant', 'content': '{"label": '}], 'model': 'meta-llama/Llama-3.2-3B-Instruct', 'temperature': 1e-10, 'top_p': 1e-10}, 'extra_json': {'guided_json': {'properties': {'label': {'title': 'Label', 'type': 'string'}}, 'required': ['label'], 'title': 'classifier_schema', 'type': 'object'}}}
+2025-02-06 14:50:44,155 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions
+2025-02-06 14:50:44,158 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-06 14:50:44,166 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-06 14:50:44,169 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-06 14:50:44,175 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-06 14:50:44,179 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-06 14:50:44,576 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 06 Feb 2025 06:50:43 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'560'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'600'), (b'x-ratelimit-limit-tokens', b'400000'), (b'x-ratelimit-remaining-requests', b'600'), (b'x-ratelimit-remaining-tokens', b'400000'), (b'Strict-Transport-Security', b'max-age=15724800; includeSubDomains')])
+2025-02-06 14:50:44,576 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:50:44,592 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-06 14:50:44,592 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-06 14:50:44,599 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-06 14:50:44,604 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-06 14:50:44,608 - openai._base_client - DEBUG - HTTP Response: POST https://api.studio.nebius.ai/v1/chat/completions "200 OK" Headers({'date': 'Thu, 06 Feb 2025 06:50:43 GMT', 'content-type': 'application/json', 'content-length': '560', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '600', 'x-ratelimit-limit-tokens': '400000', 'x-ratelimit-remaining-requests': '600', 'x-ratelimit-remaining-tokens': '400000', 'strict-transport-security': 'max-age=15724800; includeSubDomains'})
+2025-02-06 14:50:44,614 - openai._base_client - DEBUG - request_id: None
+2025-02-06 14:50:44,647 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'json_data': {'messages': [{'role': 'system', 'content': "You are an information scientist with a specialization in data analysis and categorization, particularly within the domains of retail and library science. Your expertise lies in parsing and analyzing text for keywords and accurately categorizing items based on their descriptions. You have extensive experience in identifying and organizing items into predefined categories such as 'Household', 'Books', 'Clothing & Accessories', and 'Electronics'. Your skills are highly valuable in ensuring that items are correctly labeled, making it easier for users to find what they are looking for. You are adept at using sophisticated analytical tools and your deep understanding of each category allows you to make informed decisions about how to best classify items."}, {'role': 'user', 'content': 'Instructions:\n["List of ideas: Consider the following steps: analyze the text for keywords, compare the description with known items in each category, and then label the item as one of the following: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\']."]\n\nReturn your output in a json object with the following fields according to the format below. You must not return anything else besides the json object.\n\n----------------\nOutput format:\nlabel: (Literal) Return one of the choices from the following list: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\'].\n----------------\nInput:\nBlack+Decker Hand Tool Kit (108-Piece), Orange and Black\n'}, {'role': 'assistant', 'content': '{"label": '}], 'model': 'meta-llama/Llama-3.2-3B-Instruct', 'temperature': 1e-10, 'top_p': 1e-10}, 'extra_json': {'guided_json': {'properties': {'label': {'title': 'Label', 'type': 'string'}}, 'required': ['label'], 'title': 'classifier_schema', 'type': 'object'}}}
+2025-02-06 14:50:44,654 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions
+2025-02-06 14:50:44,662 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-06 14:50:44,677 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-06 14:50:44,694 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-06 14:50:44,702 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-06 14:50:44,710 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-06 14:50:45,094 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 06 Feb 2025 06:50:44 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'560'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'600'), (b'x-ratelimit-limit-tokens', b'400000'), (b'x-ratelimit-remaining-requests', b'600'), (b'x-ratelimit-remaining-tokens', b'400000'), (b'Strict-Transport-Security', b'max-age=15724800; includeSubDomains')])
+2025-02-06 14:50:45,094 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:50:45,094 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-06 14:50:45,105 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-06 14:50:45,111 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-06 14:50:45,118 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-06 14:50:45,123 - openai._base_client - DEBUG - HTTP Response: POST https://api.studio.nebius.ai/v1/chat/completions "200 OK" Headers({'date': 'Thu, 06 Feb 2025 06:50:44 GMT', 'content-type': 'application/json', 'content-length': '560', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '600', 'x-ratelimit-limit-tokens': '400000', 'x-ratelimit-remaining-requests': '600', 'x-ratelimit-remaining-tokens': '400000', 'strict-transport-security': 'max-age=15724800; includeSubDomains'})
+2025-02-06 14:50:45,128 - openai._base_client - DEBUG - request_id: None
+2025-02-06 14:50:45,162 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'json_data': {'messages': [{'role': 'system', 'content': "You are an information scientist with a specialization in data analysis and categorization, particularly within the domains of retail and library science. Your expertise lies in parsing and analyzing text for keywords and accurately categorizing items based on their descriptions. You have extensive experience in identifying and organizing items into predefined categories such as 'Household', 'Books', 'Clothing & Accessories', and 'Electronics'. Your skills are highly valuable in ensuring that items are correctly labeled, making it easier for users to find what they are looking for. You are adept at using sophisticated analytical tools and your deep understanding of each category allows you to make informed decisions about how to best classify items."}, {'role': 'user', 'content': 'Instructions:\n["List of ideas: Consider the following steps: analyze the text for keywords, compare the description with known items in each category, and then label the item as one of the following: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\']."]\n\nReturn your output in a json object with the following fields according to the format below. You must not return anything else besides the json object.\n\n----------------\nOutput format:\nlabel: (Literal) Return one of the choices from the following list: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\'].\n----------------\nInput:\nAlibaba: The House that Jack Ma Built Review “Anybody who thinks the Chinese just copy or steal technology from the West should read this book and think again. Jack Ma is part Bill Gates, part Steve Jobs, part Larry Page, part Sergei Brin, and part Mark Zuckerberg all rolled into one.” (Sir Martin Sorrell, CEO of WPP)“Useful, business-minded reporting on an unconventional corporate magnate, containing both corporate and human-interest perspectives.” (Kirkus Reviews)“This absorbing and well-written portrayal of Ma’s character, and his role in Alibaba’s development will appeal to a wide range of readers.” (Library Journal)“A clean and compelling narrative…[Clark] tells the story with flair.” (Wall Street Journal)“A fascinating new book.” (The Economist)“A must-read for anyone hoping to navigate China’s new economy”. (Financial Times) \t\t\t\t    \t \t\t\t\t\t From the Back Cover An engrossing, insider’s account of how a teacher built one of the world’s most valuable companies—rivaling Walmart and Amazon—and forever reshaped the global economyIn just a decade and a half, Jack Ma, a man from modest beginnings who started out as an English teacher, founded Alibaba and built it into one of the world’s largest companies, an e-commerce empire on which hundreds of millions of Chinese consumers depend. In 2014, Alibaba’s $25 billion IPO was the largest global IPO in history. A Rockefeller of his time, who is courted by CEOs and presidents around the world, Jack is an icon for China’s booming private sector and the gatekeeper to hundreds of millions of middle-class consumers. Duncan Clark first met Jack in 1999 in the small apartment where Jack founded Alibaba. Granted unprecedented access to a wealth of new material, including exclusive interviews, Clark draws on his own experience as an early adviser to Alibaba as well as his two decades in China chronicling the Internet’s impact on the country to create an authoritative, compelling narrative account of Alibaba’s rise.How did Jack overcome his humble origins and early failures to achieve massive success with Alibaba? How did he outsmart rival entrepreneurs from both China and Silicon Valley? Can Alibaba maintain its 80 percent market share? As it forges ahead into finance and entertainment, are there limits to Alibaba’s ambitions? How does the Chinese government view its rise? Will Alibaba expand farther overseas, including into the United States?Clark tells Alibaba’s tale in the context of China’s momentous economic and social changes, illuminating an unlikely corporate titan as never before.Advance Praise For Alibaba“Anybody who thinks the Chinese just copy or steal technology from the West should read this book and think again. Jack Ma is part Bill Gates, part Steve Jobs, part Larry Page, part Sergey Brin, and part Mark Zuckerberg, all rolled into one.”—Sir Martin Sorrell, CEO of WPP “Duncan Clark gets into the heart and soul of Alibaba and its founder, Jack Ma, who deftly maneuvered through the discontinuities and barriers in China to create one of the greatest companies in the world. China has thrived under the leadership of Jack Ma. This book is a must-read for anyone who wants to understand the present China and the heartbeat of a great entrepreneur.”—Tim Draper, founder of Draper Associates, DFJ, and Draper University“This book provides excellent insight into the world of Jack Ma, perhaps the most famous of the leaders of the new economy in China. Duncan Clark is a real China ‘Old Hand,’ unique in his knowledge of the Jack Ma generation. This book is definitely on the short list for those who wish to understand the Chinese economy today.”—Ken Wilcox, Chairman Emeritus, Silicon Valley Bank              See all Product description\n'}, {'role': 'assistant', 'content': '{"label": '}], 'model': 'meta-llama/Llama-3.2-3B-Instruct', 'temperature': 1e-10, 'top_p': 1e-10}, 'extra_json': {'guided_json': {'properties': {'label': {'title': 'Label', 'type': 'string'}}, 'required': ['label'], 'title': 'classifier_schema', 'type': 'object'}}}
+2025-02-06 14:50:45,172 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions
+2025-02-06 14:50:45,176 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-06 14:50:45,189 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-06 14:50:45,196 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-06 14:50:45,203 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-06 14:50:45,206 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-06 14:50:45,572 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 06 Feb 2025 06:50:44 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'558'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'600'), (b'x-ratelimit-limit-tokens', b'400000'), (b'x-ratelimit-remaining-requests', b'600'), (b'x-ratelimit-remaining-tokens', b'399986'), (b'x-ratelimit-reset-tokens', b'1s'), (b'Strict-Transport-Security', b'max-age=15724800; includeSubDomains')])
+2025-02-06 14:50:45,574 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:50:45,578 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-06 14:50:45,585 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-06 14:50:45,588 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-06 14:50:45,595 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-06 14:50:45,595 - openai._base_client - DEBUG - HTTP Response: POST https://api.studio.nebius.ai/v1/chat/completions "200 OK" Headers({'date': 'Thu, 06 Feb 2025 06:50:44 GMT', 'content-type': 'application/json', 'content-length': '558', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '600', 'x-ratelimit-limit-tokens': '400000', 'x-ratelimit-remaining-requests': '600', 'x-ratelimit-remaining-tokens': '399986', 'x-ratelimit-reset-tokens': '1s', 'strict-transport-security': 'max-age=15724800; includeSubDomains'})
+2025-02-06 14:50:45,604 - openai._base_client - DEBUG - request_id: None
+2025-02-06 14:50:45,680 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'json_data': {'messages': [{'role': 'system', 'content': "You are an information scientist with a specialization in data analysis and categorization, particularly within the domains of retail and library science. Your expertise lies in parsing and analyzing text for keywords and accurately categorizing items based on their descriptions. You have extensive experience in identifying and organizing items into predefined categories such as 'Household', 'Books', 'Clothing & Accessories', and 'Electronics'. Your skills are highly valuable in ensuring that items are correctly labeled, making it easier for users to find what they are looking for. You are adept at using sophisticated analytical tools and your deep understanding of each category allows you to make informed decisions about how to best classify items."}, {'role': 'user', 'content': 'Instructions:\n["List of ideas: Consider the following steps: analyze the text for keywords, compare the description with known items in each category, and then label the item as one of the following: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\']."]\n\nReturn your output in a json object with the following fields according to the format below. You must not return anything else besides the json object.\n\n----------------\nOutput format:\nlabel: (Literal) Return one of the choices from the following list: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\'].\n----------------\nInput:\nBaby Boy/Girl Romper Newborn Jumpsuit Blue Hooded Romper Extra Soft Warm Woolen Material Baby Winter Clothes Newborn Baby Boy Girl Hooed Footed Romper Kids Long Sleeves Jumpsuit...Winter Romper to keep your baby warm and comfortable\n'}, {'role': 'assistant', 'content': '{"label": '}], 'model': 'meta-llama/Llama-3.2-3B-Instruct', 'temperature': 1e-10, 'top_p': 1e-10}, 'extra_json': {'guided_json': {'properties': {'label': {'title': 'Label', 'type': 'string'}}, 'required': ['label'], 'title': 'classifier_schema', 'type': 'object'}}}
+2025-02-06 14:50:45,738 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions
+2025-02-06 14:50:45,745 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-06 14:50:45,752 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-06 14:50:45,759 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-06 14:50:45,770 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-06 14:50:45,779 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-06 14:50:46,218 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 06 Feb 2025 06:50:45 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'574'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'600'), (b'x-ratelimit-limit-tokens', b'400000'), (b'x-ratelimit-remaining-requests', b'600'), (b'x-ratelimit-remaining-tokens', b'400000'), (b'Strict-Transport-Security', b'max-age=15724800; includeSubDomains')])
+2025-02-06 14:50:46,220 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:50:46,225 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-06 14:50:46,229 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-06 14:50:46,235 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-06 14:50:46,240 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-06 14:50:46,243 - openai._base_client - DEBUG - HTTP Response: POST https://api.studio.nebius.ai/v1/chat/completions "200 OK" Headers({'date': 'Thu, 06 Feb 2025 06:50:45 GMT', 'content-type': 'application/json', 'content-length': '574', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '600', 'x-ratelimit-limit-tokens': '400000', 'x-ratelimit-remaining-requests': '600', 'x-ratelimit-remaining-tokens': '400000', 'strict-transport-security': 'max-age=15724800; includeSubDomains'})
+2025-02-06 14:50:46,247 - openai._base_client - DEBUG - request_id: None
+2025-02-06 14:50:46,285 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'json_data': {'messages': [{'role': 'system', 'content': "You are an information scientist with a specialization in data analysis and categorization, particularly within the domains of retail and library science. Your expertise lies in parsing and analyzing text for keywords and accurately categorizing items based on their descriptions. You have extensive experience in identifying and organizing items into predefined categories such as 'Household', 'Books', 'Clothing & Accessories', and 'Electronics'. Your skills are highly valuable in ensuring that items are correctly labeled, making it easier for users to find what they are looking for. You are adept at using sophisticated analytical tools and your deep understanding of each category allows you to make informed decisions about how to best classify items."}, {'role': 'user', 'content': 'Instructions:\n["List of ideas: Consider the following steps: analyze the text for keywords, compare the description with known items in each category, and then label the item as one of the following: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\']."]\n\nReturn your output in a json object with the following fields according to the format below. You must not return anything else besides the json object.\n\n----------------\nOutput format:\nlabel: (Literal) Return one of the choices from the following list: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\'].\n----------------\nInput:\nS4S Men\'s 100% Cotton Premium Collection Handkerchiefs - Pack of 12 (White_46X46 CM) An ideal handkerchief for modern gentleman from our premium collection. These 100% premium cotton formal handkerchiefs are soft and gentle on skin and absorb sweat keeping you fresh and feeling refreshed. Feel the softness after 2-3 wash. Made from 100% cotton fabric, Large in size. These handkerchiefs are perfect accessory to complement your look.\n'}, {'role': 'assistant', 'content': '{"label": '}], 'model': 'meta-llama/Llama-3.2-3B-Instruct', 'temperature': 1e-10, 'top_p': 1e-10}, 'extra_json': {'guided_json': {'properties': {'label': {'title': 'Label', 'type': 'string'}}, 'required': ['label'], 'title': 'classifier_schema', 'type': 'object'}}}
+2025-02-06 14:50:46,289 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions
+2025-02-06 14:50:46,297 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-06 14:50:46,297 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-06 14:50:46,307 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-06 14:50:46,314 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-06 14:50:46,316 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-06 14:50:46,732 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 06 Feb 2025 06:50:46 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'574'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'600'), (b'x-ratelimit-limit-tokens', b'400000'), (b'x-ratelimit-remaining-requests', b'600'), (b'x-ratelimit-remaining-tokens', b'400000'), (b'Strict-Transport-Security', b'max-age=15724800; includeSubDomains')])
+2025-02-06 14:50:46,737 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:50:46,741 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-06 14:50:46,747 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-06 14:50:46,751 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-06 14:50:46,755 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-06 14:50:46,759 - openai._base_client - DEBUG - HTTP Response: POST https://api.studio.nebius.ai/v1/chat/completions "200 OK" Headers({'date': 'Thu, 06 Feb 2025 06:50:46 GMT', 'content-type': 'application/json', 'content-length': '574', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '600', 'x-ratelimit-limit-tokens': '400000', 'x-ratelimit-remaining-requests': '600', 'x-ratelimit-remaining-tokens': '400000', 'strict-transport-security': 'max-age=15724800; includeSubDomains'})
+2025-02-06 14:50:46,765 - openai._base_client - DEBUG - request_id: None
+2025-02-06 14:50:46,802 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'json_data': {'messages': [{'role': 'system', 'content': "You are an information scientist with a specialization in data analysis and categorization, particularly within the domains of retail and library science. Your expertise lies in parsing and analyzing text for keywords and accurately categorizing items based on their descriptions. You have extensive experience in identifying and organizing items into predefined categories such as 'Household', 'Books', 'Clothing & Accessories', and 'Electronics'. Your skills are highly valuable in ensuring that items are correctly labeled, making it easier for users to find what they are looking for. You are adept at using sophisticated analytical tools and your deep understanding of each category allows you to make informed decisions about how to best classify items."}, {'role': 'user', 'content': 'Instructions:\n["List of ideas: Consider the following steps: analyze the text for keywords, compare the description with known items in each category, and then label the item as one of the following: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\']."]\n\nReturn your output in a json object with the following fields according to the format below. You must not return anything else besides the json object.\n\n----------------\nOutput format:\nlabel: (Literal) Return one of the choices from the following list: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\'].\n----------------\nInput:\nKraft Seeds Multipurpose Kitchen Household and Garden Scissor (Color May Vary) Sharp edges easy to use confortable grip stylish look. Total length: 8.5-inch, blade size: 4.5-inch.\n'}, {'role': 'assistant', 'content': '{"label": '}], 'model': 'meta-llama/Llama-3.2-3B-Instruct', 'temperature': 1e-10, 'top_p': 1e-10}, 'extra_json': {'guided_json': {'properties': {'label': {'title': 'Label', 'type': 'string'}}, 'required': ['label'], 'title': 'classifier_schema', 'type': 'object'}}}
+2025-02-06 14:50:46,811 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions
+2025-02-06 14:50:46,820 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-06 14:50:46,825 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-06 14:50:46,828 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-06 14:50:46,833 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-06 14:50:46,841 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-06 14:50:47,241 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 06 Feb 2025 06:50:46 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'560'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'600'), (b'x-ratelimit-limit-tokens', b'400000'), (b'x-ratelimit-remaining-requests', b'600'), (b'x-ratelimit-remaining-tokens', b'400000'), (b'Strict-Transport-Security', b'max-age=15724800; includeSubDomains')])
+2025-02-06 14:50:47,243 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:50:47,252 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-06 14:50:47,256 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-06 14:50:47,260 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-06 14:50:47,264 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-06 14:50:47,268 - openai._base_client - DEBUG - HTTP Response: POST https://api.studio.nebius.ai/v1/chat/completions "200 OK" Headers({'date': 'Thu, 06 Feb 2025 06:50:46 GMT', 'content-type': 'application/json', 'content-length': '560', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '600', 'x-ratelimit-limit-tokens': '400000', 'x-ratelimit-remaining-requests': '600', 'x-ratelimit-remaining-tokens': '400000', 'strict-transport-security': 'max-age=15724800; includeSubDomains'})
+2025-02-06 14:50:47,274 - openai._base_client - DEBUG - request_id: None
+2025-02-06 14:51:23,122 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'json_data': {'messages': [{'role': 'system', 'content': "You are an information scientist with a specialization in data analysis and categorization, particularly within the domains of retail and library science. Your expertise lies in parsing and analyzing text for keywords and accurately categorizing items based on their descriptions. You have extensive experience in identifying and organizing items into predefined categories such as 'Household', 'Books', 'Clothing & Accessories', and 'Electronics'. Your skills are highly valuable in ensuring that items are correctly labeled, making it easier for users to find what they are looking for. You are adept at using sophisticated analytical tools and your deep understanding of each category allows you to make informed decisions about how to best classify items."}, {'role': 'user', 'content': 'Instructions:\n["List of ideas: Consider the following steps: analyze the text for keywords, compare the description with known items in each category, and then label the item as one of the following: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\']."]\n\nReturn your output in a json object with the following fields according to the format below. You must not return anything else besides the json object.\n\n----------------\nOutput format:\nlabel: (Literal) Return one of the choices from the following list: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\'].\n----------------\nInput:\nPigeon Popcorn Maker, 1200watts, Yellow No movie marathon is complete without a bowl of popcorn. Bring home the Pigeon Popcorn Maker and make delicious and fresh popcorn easily.\n'}, {'role': 'assistant', 'content': '{"label": '}], 'model': 'meta-llama/Llama-3.2-3B-Instruct', 'temperature': 1e-10, 'top_p': 1e-10}, 'extra_json': {'guided_json': {'properties': {'label': {'title': 'Label', 'type': 'string'}}, 'required': ['label'], 'title': 'classifier_schema', 'type': 'object'}}}
+2025-02-06 14:51:23,128 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions
+2025-02-06 14:51:23,131 - httpcore.connection - DEBUG - close.started
+2025-02-06 14:51:23,133 - httpcore.connection - DEBUG - close.complete
+2025-02-06 14:51:23,139 - httpcore.connection - DEBUG - connect_tcp.started host='api.studio.nebius.ai' port=443 local_address=None timeout=5.0 socket_options=None
+2025-02-06 14:51:23,392 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x00000204746A4170>
+2025-02-06 14:51:23,394 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x0000020474304950> server_hostname='api.studio.nebius.ai' timeout=5.0
+2025-02-06 14:51:23,605 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x0000020475A18EF0>
+2025-02-06 14:51:23,607 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-06 14:51:23,613 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-06 14:51:23,618 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-06 14:51:23,622 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-06 14:51:23,624 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-06 14:51:23,952 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 06 Feb 2025 06:51:23 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'560'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'600'), (b'x-ratelimit-limit-tokens', b'400000'), (b'x-ratelimit-remaining-requests', b'600'), (b'x-ratelimit-remaining-tokens', b'400000'), (b'Strict-Transport-Security', b'max-age=15724800; includeSubDomains')])
+2025-02-06 14:51:23,958 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:51:23,964 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-06 14:51:23,964 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-06 14:51:23,973 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-06 14:51:23,979 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-06 14:51:23,986 - openai._base_client - DEBUG - HTTP Response: POST https://api.studio.nebius.ai/v1/chat/completions "200 OK" Headers({'date': 'Thu, 06 Feb 2025 06:51:23 GMT', 'content-type': 'application/json', 'content-length': '560', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '600', 'x-ratelimit-limit-tokens': '400000', 'x-ratelimit-remaining-requests': '600', 'x-ratelimit-remaining-tokens': '400000', 'strict-transport-security': 'max-age=15724800; includeSubDomains'})
+2025-02-06 14:51:23,991 - openai._base_client - DEBUG - request_id: None
+2025-02-06 14:51:24,034 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'json_data': {'messages': [{'role': 'system', 'content': "You are an information scientist with a specialization in data analysis and categorization, particularly within the domains of retail and library science. Your expertise lies in parsing and analyzing text for keywords and accurately categorizing items based on their descriptions. You have extensive experience in identifying and organizing items into predefined categories such as 'Household', 'Books', 'Clothing & Accessories', and 'Electronics'. Your skills are highly valuable in ensuring that items are correctly labeled, making it easier for users to find what they are looking for. You are adept at using sophisticated analytical tools and your deep understanding of each category allows you to make informed decisions about how to best classify items."}, {'role': 'user', 'content': 'Instructions:\n["List of ideas: Consider the following steps: analyze the text for keywords, compare the description with known items in each category, and then label the item as one of the following: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\']."]\n\nReturn your output in a json object with the following fields according to the format below. You must not return anything else besides the json object.\n\n----------------\nOutput format:\nlabel: (Literal) Return one of the choices from the following list: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\'].\n----------------\nInput:\nboAt BassHeads 225 in-Ear Super Extra Bass Headphones (Black) Colour:Black   boAt BassHeads 225 polished metal earphones are designed to give you an experience which no other brand can match. It has an incredible sonic clarity with "Super Extra Bass". It is not a plastic earphone - It is polished metal. With tangle free flat cables, you are expected to be hassle free. As the headphones feature 10mm drivers, they give you clear sound with that thumping bass. In-built noise cancelling mic ensures you don\'t miss those important calls. With colors that match your style in your day, the boAt earphones are the ideal choice for anyone who can carry that attitude. Just plug them in and plug into nirvana. boAt contact_us on : [ 02242102403 ]\n'}, {'role': 'assistant', 'content': '{"label": '}], 'model': 'meta-llama/Llama-3.2-3B-Instruct', 'temperature': 1e-10, 'top_p': 1e-10}, 'extra_json': {'guided_json': {'properties': {'label': {'title': 'Label', 'type': 'string'}}, 'required': ['label'], 'title': 'classifier_schema', 'type': 'object'}}}
+2025-02-06 14:51:24,044 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions
+2025-02-06 14:51:24,051 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-06 14:51:24,058 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-06 14:51:24,065 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-06 14:51:24,072 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-06 14:51:24,075 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-06 14:51:24,408 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 06 Feb 2025 06:51:23 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'562'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'600'), (b'x-ratelimit-limit-tokens', b'400000'), (b'x-ratelimit-remaining-requests', b'600'), (b'x-ratelimit-remaining-tokens', b'400000'), (b'Strict-Transport-Security', b'max-age=15724800; includeSubDomains')])
+2025-02-06 14:51:24,408 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:51:24,415 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-06 14:51:24,419 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-06 14:51:24,427 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-06 14:51:24,427 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-06 14:51:24,436 - openai._base_client - DEBUG - HTTP Response: POST https://api.studio.nebius.ai/v1/chat/completions "200 OK" Headers({'date': 'Thu, 06 Feb 2025 06:51:23 GMT', 'content-type': 'application/json', 'content-length': '562', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '600', 'x-ratelimit-limit-tokens': '400000', 'x-ratelimit-remaining-requests': '600', 'x-ratelimit-remaining-tokens': '400000', 'strict-transport-security': 'max-age=15724800; includeSubDomains'})
+2025-02-06 14:51:24,441 - openai._base_client - DEBUG - request_id: None
+2025-02-06 14:51:24,488 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'json_data': {'messages': [{'role': 'system', 'content': "You are an information scientist with a specialization in data analysis and categorization, particularly within the domains of retail and library science. Your expertise lies in parsing and analyzing text for keywords and accurately categorizing items based on their descriptions. You have extensive experience in identifying and organizing items into predefined categories such as 'Household', 'Books', 'Clothing & Accessories', and 'Electronics'. Your skills are highly valuable in ensuring that items are correctly labeled, making it easier for users to find what they are looking for. You are adept at using sophisticated analytical tools and your deep understanding of each category allows you to make informed decisions about how to best classify items."}, {'role': 'user', 'content': 'Instructions:\n["List of ideas: Consider the following steps: analyze the text for keywords, compare the description with known items in each category, and then label the item as one of the following: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\']."]\n\nReturn your output in a json object with the following fields according to the format below. You must not return anything else besides the json object.\n\n----------------\nOutput format:\nlabel: (Literal) Return one of the choices from the following list: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\'].\n----------------\nInput:\nPrestige PIC 3.1 V3 2000-Watt Induction Cooktop with Touch Panel (Black) Style:PIC 3.1 V3 2000-Watt Induction Cooktop with Touch panel   The innovative Prestige Induction Cook-Top offers quick and consistent heating at highest efficiency. Add to this its anti-magnetic wall, soft touch buttons, durability, safety and elegance makes cooking a pleasing and enjoyable experience. The Prestige Induction Cook-Top comes with the unique whistle counter, power saver technology and keep warm function wherein the Induction Cook-Top dynamically monitors the temperature of the vessel and adjusts the power level based on the size (base diameter) of the vessel. The dual heat sensor provided in the Induction Cook-Top automatically senses the temperature of the vessel and prevents over heating thereby saving power. With latest technology and features, this cooktop will be the best addition to your kitchen!\n'}, {'role': 'assistant', 'content': '{"label": '}], 'model': 'meta-llama/Llama-3.2-3B-Instruct', 'temperature': 1e-10, 'top_p': 1e-10}, 'extra_json': {'guided_json': {'properties': {'label': {'title': 'Label', 'type': 'string'}}, 'required': ['label'], 'title': 'classifier_schema', 'type': 'object'}}}
+2025-02-06 14:51:24,494 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions
+2025-02-06 14:51:24,501 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-06 14:51:24,506 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-06 14:51:24,511 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-06 14:51:24,519 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-06 14:51:24,525 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-06 14:51:24,855 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 06 Feb 2025 06:51:24 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'562'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'600'), (b'x-ratelimit-limit-tokens', b'400000'), (b'x-ratelimit-remaining-requests', b'600'), (b'x-ratelimit-remaining-tokens', b'400000'), (b'Strict-Transport-Security', b'max-age=15724800; includeSubDomains')])
+2025-02-06 14:51:24,857 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:51:24,857 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-06 14:51:24,869 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-06 14:51:24,874 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-06 14:51:24,877 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-06 14:51:24,882 - openai._base_client - DEBUG - HTTP Response: POST https://api.studio.nebius.ai/v1/chat/completions "200 OK" Headers({'date': 'Thu, 06 Feb 2025 06:51:24 GMT', 'content-type': 'application/json', 'content-length': '562', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '600', 'x-ratelimit-limit-tokens': '400000', 'x-ratelimit-remaining-requests': '600', 'x-ratelimit-remaining-tokens': '400000', 'strict-transport-security': 'max-age=15724800; includeSubDomains'})
+2025-02-06 14:51:24,882 - openai._base_client - DEBUG - request_id: None
+2025-02-06 14:51:24,934 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'json_data': {'messages': [{'role': 'system', 'content': "You are an information scientist with a specialization in data analysis and categorization, particularly within the domains of retail and library science. Your expertise lies in parsing and analyzing text for keywords and accurately categorizing items based on their descriptions. You have extensive experience in identifying and organizing items into predefined categories such as 'Household', 'Books', 'Clothing & Accessories', and 'Electronics'. Your skills are highly valuable in ensuring that items are correctly labeled, making it easier for users to find what they are looking for. You are adept at using sophisticated analytical tools and your deep understanding of each category allows you to make informed decisions about how to best classify items."}, {'role': 'user', 'content': 'Instructions:\n["List of ideas: Consider the following steps: analyze the text for keywords, compare the description with known items in each category, and then label the item as one of the following: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\']."]\n\nReturn your output in a json object with the following fields according to the format below. You must not return anything else besides the json object.\n\n----------------\nOutput format:\nlabel: (Literal) Return one of the choices from the following list: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\'].\n----------------\nInput:\nThink & Grow Rich - Lectures by Napoleon Hill [MP3]\n'}, {'role': 'assistant', 'content': '{"label": '}], 'model': 'meta-llama/Llama-3.2-3B-Instruct', 'temperature': 1e-10, 'top_p': 1e-10}, 'extra_json': {'guided_json': {'properties': {'label': {'title': 'Label', 'type': 'string'}}, 'required': ['label'], 'title': 'classifier_schema', 'type': 'object'}}}
+2025-02-06 14:51:24,942 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions
+2025-02-06 14:51:24,947 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-06 14:51:24,951 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-06 14:51:24,959 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-06 14:51:24,963 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-06 14:51:24,972 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-06 14:51:25,289 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 06 Feb 2025 06:51:24 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'556'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'600'), (b'x-ratelimit-limit-tokens', b'400000'), (b'x-ratelimit-remaining-requests', b'600'), (b'x-ratelimit-remaining-tokens', b'400000'), (b'Strict-Transport-Security', b'max-age=15724800; includeSubDomains')])
+2025-02-06 14:51:25,289 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:51:25,289 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-06 14:51:25,302 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-06 14:51:25,305 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-06 14:51:25,306 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-06 14:51:25,309 - openai._base_client - DEBUG - HTTP Response: POST https://api.studio.nebius.ai/v1/chat/completions "200 OK" Headers({'date': 'Thu, 06 Feb 2025 06:51:24 GMT', 'content-type': 'application/json', 'content-length': '556', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '600', 'x-ratelimit-limit-tokens': '400000', 'x-ratelimit-remaining-requests': '600', 'x-ratelimit-remaining-tokens': '400000', 'strict-transport-security': 'max-age=15724800; includeSubDomains'})
+2025-02-06 14:51:25,312 - openai._base_client - DEBUG - request_id: None
+2025-02-06 14:51:25,328 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'json_data': {'messages': [{'role': 'system', 'content': "You are an information scientist with a specialization in data analysis and categorization, particularly within the domains of retail and library science. Your expertise lies in parsing and analyzing text for keywords and accurately categorizing items based on their descriptions. You have extensive experience in identifying and organizing items into predefined categories such as 'Household', 'Books', 'Clothing & Accessories', and 'Electronics'. Your skills are highly valuable in ensuring that items are correctly labeled, making it easier for users to find what they are looking for. You are adept at using sophisticated analytical tools and your deep understanding of each category allows you to make informed decisions about how to best classify items."}, {'role': 'user', 'content': 'Instructions:\n["List of ideas: Consider the following steps: analyze the text for keywords, compare the description with known items in each category, and then label the item as one of the following: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\']."]\n\nReturn your output in a json object with the following fields according to the format below. You must not return anything else besides the json object.\n\n----------------\nOutput format:\nlabel: (Literal) Return one of the choices from the following list: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\'].\n----------------\nInput:\nDeckUp Meritus-S Wall TV Unit (Dark Wenge, Matte Finish) Color:Dark Wenge   Assembly Required: The Product Requires Basic Assembly And Comes With Diy (Do-It-Yourself) Assembly Instructions.Product Dimensions: Length (30 Inches), Width (12 Inches), Height (11 Inches).Primary Material: Engineered Wood With Melamine Laminate.Color: Dark Wenge, Finish: Matte Finish, Style: Contemporary.\n'}, {'role': 'assistant', 'content': '{"label": '}], 'model': 'meta-llama/Llama-3.2-3B-Instruct', 'temperature': 1e-10, 'top_p': 1e-10}, 'extra_json': {'guided_json': {'properties': {'label': {'title': 'Label', 'type': 'string'}}, 'required': ['label'], 'title': 'classifier_schema', 'type': 'object'}}}
+2025-02-06 14:51:25,339 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions
+2025-02-06 14:51:25,345 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-06 14:51:25,348 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-06 14:51:25,356 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-06 14:51:25,363 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-06 14:51:25,369 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-06 14:51:25,694 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 06 Feb 2025 06:51:25 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'562'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'600'), (b'x-ratelimit-limit-tokens', b'400000'), (b'x-ratelimit-remaining-requests', b'600'), (b'x-ratelimit-remaining-tokens', b'400000'), (b'Strict-Transport-Security', b'max-age=15724800; includeSubDomains')])
+2025-02-06 14:51:25,706 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:51:25,710 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-06 14:51:25,714 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-06 14:51:25,718 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-06 14:51:25,722 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-06 14:51:25,727 - openai._base_client - DEBUG - HTTP Response: POST https://api.studio.nebius.ai/v1/chat/completions "200 OK" Headers({'date': 'Thu, 06 Feb 2025 06:51:25 GMT', 'content-type': 'application/json', 'content-length': '562', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '600', 'x-ratelimit-limit-tokens': '400000', 'x-ratelimit-remaining-requests': '600', 'x-ratelimit-remaining-tokens': '400000', 'strict-transport-security': 'max-age=15724800; includeSubDomains'})
+2025-02-06 14:51:25,729 - openai._base_client - DEBUG - request_id: None
+2025-02-06 14:51:25,782 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'json_data': {'messages': [{'role': 'system', 'content': "You are an information scientist with a specialization in data analysis and categorization, particularly within the domains of retail and library science. Your expertise lies in parsing and analyzing text for keywords and accurately categorizing items based on their descriptions. You have extensive experience in identifying and organizing items into predefined categories such as 'Household', 'Books', 'Clothing & Accessories', and 'Electronics'. Your skills are highly valuable in ensuring that items are correctly labeled, making it easier for users to find what they are looking for. You are adept at using sophisticated analytical tools and your deep understanding of each category allows you to make informed decisions about how to best classify items."}, {'role': 'user', 'content': 'Instructions:\n["List of ideas: Consider the following steps: analyze the text for keywords, compare the description with known items in each category, and then label the item as one of the following: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\']."]\n\nReturn your output in a json object with the following fields according to the format below. You must not return anything else besides the json object.\n\n----------------\nOutput format:\nlabel: (Literal) Return one of the choices from the following list: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\'].\n----------------\nInput:\nBlack+Decker Hand Tool Kit (108-Piece), Orange and Black\n'}, {'role': 'assistant', 'content': '{"label": '}], 'model': 'meta-llama/Llama-3.2-3B-Instruct', 'temperature': 1e-10, 'top_p': 1e-10}, 'extra_json': {'guided_json': {'properties': {'label': {'title': 'Label', 'type': 'string'}}, 'required': ['label'], 'title': 'classifier_schema', 'type': 'object'}}}
+2025-02-06 14:51:25,792 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions
+2025-02-06 14:51:25,798 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-06 14:51:25,806 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-06 14:51:25,808 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-06 14:51:25,818 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-06 14:51:25,827 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-06 14:51:26,156 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 06 Feb 2025 06:51:25 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'560'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'600'), (b'x-ratelimit-limit-tokens', b'400000'), (b'x-ratelimit-remaining-requests', b'600'), (b'x-ratelimit-remaining-tokens', b'400000'), (b'Strict-Transport-Security', b'max-age=15724800; includeSubDomains')])
+2025-02-06 14:51:26,160 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:51:26,160 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-06 14:51:26,170 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-06 14:51:26,174 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-06 14:51:26,180 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-06 14:51:26,187 - openai._base_client - DEBUG - HTTP Response: POST https://api.studio.nebius.ai/v1/chat/completions "200 OK" Headers({'date': 'Thu, 06 Feb 2025 06:51:25 GMT', 'content-type': 'application/json', 'content-length': '560', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '600', 'x-ratelimit-limit-tokens': '400000', 'x-ratelimit-remaining-requests': '600', 'x-ratelimit-remaining-tokens': '400000', 'strict-transport-security': 'max-age=15724800; includeSubDomains'})
+2025-02-06 14:51:26,192 - openai._base_client - DEBUG - request_id: None
+2025-02-06 14:51:26,227 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'json_data': {'messages': [{'role': 'system', 'content': "You are an information scientist with a specialization in data analysis and categorization, particularly within the domains of retail and library science. Your expertise lies in parsing and analyzing text for keywords and accurately categorizing items based on their descriptions. You have extensive experience in identifying and organizing items into predefined categories such as 'Household', 'Books', 'Clothing & Accessories', and 'Electronics'. Your skills are highly valuable in ensuring that items are correctly labeled, making it easier for users to find what they are looking for. You are adept at using sophisticated analytical tools and your deep understanding of each category allows you to make informed decisions about how to best classify items."}, {'role': 'user', 'content': 'Instructions:\n["List of ideas: Consider the following steps: analyze the text for keywords, compare the description with known items in each category, and then label the item as one of the following: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\']."]\n\nReturn your output in a json object with the following fields according to the format below. You must not return anything else besides the json object.\n\n----------------\nOutput format:\nlabel: (Literal) Return one of the choices from the following list: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\'].\n----------------\nInput:\nAlibaba: The House that Jack Ma Built Review “Anybody who thinks the Chinese just copy or steal technology from the West should read this book and think again. Jack Ma is part Bill Gates, part Steve Jobs, part Larry Page, part Sergei Brin, and part Mark Zuckerberg all rolled into one.” (Sir Martin Sorrell, CEO of WPP)“Useful, business-minded reporting on an unconventional corporate magnate, containing both corporate and human-interest perspectives.” (Kirkus Reviews)“This absorbing and well-written portrayal of Ma’s character, and his role in Alibaba’s development will appeal to a wide range of readers.” (Library Journal)“A clean and compelling narrative…[Clark] tells the story with flair.” (Wall Street Journal)“A fascinating new book.” (The Economist)“A must-read for anyone hoping to navigate China’s new economy”. (Financial Times) \t\t\t\t    \t \t\t\t\t\t From the Back Cover An engrossing, insider’s account of how a teacher built one of the world’s most valuable companies—rivaling Walmart and Amazon—and forever reshaped the global economyIn just a decade and a half, Jack Ma, a man from modest beginnings who started out as an English teacher, founded Alibaba and built it into one of the world’s largest companies, an e-commerce empire on which hundreds of millions of Chinese consumers depend. In 2014, Alibaba’s $25 billion IPO was the largest global IPO in history. A Rockefeller of his time, who is courted by CEOs and presidents around the world, Jack is an icon for China’s booming private sector and the gatekeeper to hundreds of millions of middle-class consumers. Duncan Clark first met Jack in 1999 in the small apartment where Jack founded Alibaba. Granted unprecedented access to a wealth of new material, including exclusive interviews, Clark draws on his own experience as an early adviser to Alibaba as well as his two decades in China chronicling the Internet’s impact on the country to create an authoritative, compelling narrative account of Alibaba’s rise.How did Jack overcome his humble origins and early failures to achieve massive success with Alibaba? How did he outsmart rival entrepreneurs from both China and Silicon Valley? Can Alibaba maintain its 80 percent market share? As it forges ahead into finance and entertainment, are there limits to Alibaba’s ambitions? How does the Chinese government view its rise? Will Alibaba expand farther overseas, including into the United States?Clark tells Alibaba’s tale in the context of China’s momentous economic and social changes, illuminating an unlikely corporate titan as never before.Advance Praise For Alibaba“Anybody who thinks the Chinese just copy or steal technology from the West should read this book and think again. Jack Ma is part Bill Gates, part Steve Jobs, part Larry Page, part Sergey Brin, and part Mark Zuckerberg, all rolled into one.”—Sir Martin Sorrell, CEO of WPP “Duncan Clark gets into the heart and soul of Alibaba and its founder, Jack Ma, who deftly maneuvered through the discontinuities and barriers in China to create one of the greatest companies in the world. China has thrived under the leadership of Jack Ma. This book is a must-read for anyone who wants to understand the present China and the heartbeat of a great entrepreneur.”—Tim Draper, founder of Draper Associates, DFJ, and Draper University“This book provides excellent insight into the world of Jack Ma, perhaps the most famous of the leaders of the new economy in China. Duncan Clark is a real China ‘Old Hand,’ unique in his knowledge of the Jack Ma generation. This book is definitely on the short list for those who wish to understand the Chinese economy today.”—Ken Wilcox, Chairman Emeritus, Silicon Valley Bank              See all Product description\n'}, {'role': 'assistant', 'content': '{"label": '}], 'model': 'meta-llama/Llama-3.2-3B-Instruct', 'temperature': 1e-10, 'top_p': 1e-10}, 'extra_json': {'guided_json': {'properties': {'label': {'title': 'Label', 'type': 'string'}}, 'required': ['label'], 'title': 'classifier_schema', 'type': 'object'}}}
+2025-02-06 14:51:26,237 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions
+2025-02-06 14:51:26,241 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-06 14:51:26,247 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-06 14:51:26,251 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-06 14:51:26,257 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-06 14:51:26,264 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-06 14:51:26,608 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 06 Feb 2025 06:51:25 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'558'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'600'), (b'x-ratelimit-limit-tokens', b'400000'), (b'x-ratelimit-remaining-requests', b'600'), (b'x-ratelimit-remaining-tokens', b'399913'), (b'x-ratelimit-reset-tokens', b'1s'), (b'Strict-Transport-Security', b'max-age=15724800; includeSubDomains')])
+2025-02-06 14:51:26,612 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:51:26,614 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-06 14:51:26,618 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-06 14:51:26,623 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-06 14:51:26,628 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-06 14:51:26,632 - openai._base_client - DEBUG - HTTP Response: POST https://api.studio.nebius.ai/v1/chat/completions "200 OK" Headers({'date': 'Thu, 06 Feb 2025 06:51:25 GMT', 'content-type': 'application/json', 'content-length': '558', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '600', 'x-ratelimit-limit-tokens': '400000', 'x-ratelimit-remaining-requests': '600', 'x-ratelimit-remaining-tokens': '399913', 'x-ratelimit-reset-tokens': '1s', 'strict-transport-security': 'max-age=15724800; includeSubDomains'})
+2025-02-06 14:51:26,643 - openai._base_client - DEBUG - request_id: None
+2025-02-06 14:51:26,679 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'json_data': {'messages': [{'role': 'system', 'content': "You are an information scientist with a specialization in data analysis and categorization, particularly within the domains of retail and library science. Your expertise lies in parsing and analyzing text for keywords and accurately categorizing items based on their descriptions. You have extensive experience in identifying and organizing items into predefined categories such as 'Household', 'Books', 'Clothing & Accessories', and 'Electronics'. Your skills are highly valuable in ensuring that items are correctly labeled, making it easier for users to find what they are looking for. You are adept at using sophisticated analytical tools and your deep understanding of each category allows you to make informed decisions about how to best classify items."}, {'role': 'user', 'content': 'Instructions:\n["List of ideas: Consider the following steps: analyze the text for keywords, compare the description with known items in each category, and then label the item as one of the following: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\']."]\n\nReturn your output in a json object with the following fields according to the format below. You must not return anything else besides the json object.\n\n----------------\nOutput format:\nlabel: (Literal) Return one of the choices from the following list: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\'].\n----------------\nInput:\nBaby Boy/Girl Romper Newborn Jumpsuit Blue Hooded Romper Extra Soft Warm Woolen Material Baby Winter Clothes Newborn Baby Boy Girl Hooed Footed Romper Kids Long Sleeves Jumpsuit...Winter Romper to keep your baby warm and comfortable\n'}, {'role': 'assistant', 'content': '{"label": '}], 'model': 'meta-llama/Llama-3.2-3B-Instruct', 'temperature': 1e-10, 'top_p': 1e-10}, 'extra_json': {'guided_json': {'properties': {'label': {'title': 'Label', 'type': 'string'}}, 'required': ['label'], 'title': 'classifier_schema', 'type': 'object'}}}
+2025-02-06 14:51:26,687 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions
+2025-02-06 14:51:26,695 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-06 14:51:26,704 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-06 14:51:26,709 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-06 14:51:26,713 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-06 14:51:26,719 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-06 14:51:27,281 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 06 Feb 2025 06:51:26 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'574'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'600'), (b'x-ratelimit-limit-tokens', b'400000'), (b'x-ratelimit-remaining-requests', b'600'), (b'x-ratelimit-remaining-tokens', b'400000'), (b'Strict-Transport-Security', b'max-age=15724800; includeSubDomains')])
+2025-02-06 14:51:27,286 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:51:27,290 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-06 14:51:27,292 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-06 14:51:27,296 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-06 14:51:27,301 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-06 14:51:27,305 - openai._base_client - DEBUG - HTTP Response: POST https://api.studio.nebius.ai/v1/chat/completions "200 OK" Headers({'date': 'Thu, 06 Feb 2025 06:51:26 GMT', 'content-type': 'application/json', 'content-length': '574', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '600', 'x-ratelimit-limit-tokens': '400000', 'x-ratelimit-remaining-requests': '600', 'x-ratelimit-remaining-tokens': '400000', 'strict-transport-security': 'max-age=15724800; includeSubDomains'})
+2025-02-06 14:51:27,307 - openai._base_client - DEBUG - request_id: None
+2025-02-06 14:51:27,340 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'json_data': {'messages': [{'role': 'system', 'content': "You are an information scientist with a specialization in data analysis and categorization, particularly within the domains of retail and library science. Your expertise lies in parsing and analyzing text for keywords and accurately categorizing items based on their descriptions. You have extensive experience in identifying and organizing items into predefined categories such as 'Household', 'Books', 'Clothing & Accessories', and 'Electronics'. Your skills are highly valuable in ensuring that items are correctly labeled, making it easier for users to find what they are looking for. You are adept at using sophisticated analytical tools and your deep understanding of each category allows you to make informed decisions about how to best classify items."}, {'role': 'user', 'content': 'Instructions:\n["List of ideas: Consider the following steps: analyze the text for keywords, compare the description with known items in each category, and then label the item as one of the following: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\']."]\n\nReturn your output in a json object with the following fields according to the format below. You must not return anything else besides the json object.\n\n----------------\nOutput format:\nlabel: (Literal) Return one of the choices from the following list: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\'].\n----------------\nInput:\nS4S Men\'s 100% Cotton Premium Collection Handkerchiefs - Pack of 12 (White_46X46 CM) An ideal handkerchief for modern gentleman from our premium collection. These 100% premium cotton formal handkerchiefs are soft and gentle on skin and absorb sweat keeping you fresh and feeling refreshed. Feel the softness after 2-3 wash. Made from 100% cotton fabric, Large in size. These handkerchiefs are perfect accessory to complement your look.\n'}, {'role': 'assistant', 'content': '{"label": '}], 'model': 'meta-llama/Llama-3.2-3B-Instruct', 'temperature': 1e-10, 'top_p': 1e-10}, 'extra_json': {'guided_json': {'properties': {'label': {'title': 'Label', 'type': 'string'}}, 'required': ['label'], 'title': 'classifier_schema', 'type': 'object'}}}
+2025-02-06 14:51:27,375 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions
+2025-02-06 14:51:27,392 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-06 14:51:27,400 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-06 14:51:27,408 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-06 14:51:27,412 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-06 14:51:27,420 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-06 14:51:27,793 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 06 Feb 2025 06:51:27 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'574'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'600'), (b'x-ratelimit-limit-tokens', b'400000'), (b'x-ratelimit-remaining-requests', b'600'), (b'x-ratelimit-remaining-tokens', b'400000'), (b'Strict-Transport-Security', b'max-age=15724800; includeSubDomains')])
+2025-02-06 14:51:27,797 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:51:27,800 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-06 14:51:27,806 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-06 14:51:27,811 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-06 14:51:27,811 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-06 14:51:27,817 - openai._base_client - DEBUG - HTTP Response: POST https://api.studio.nebius.ai/v1/chat/completions "200 OK" Headers({'date': 'Thu, 06 Feb 2025 06:51:27 GMT', 'content-type': 'application/json', 'content-length': '574', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '600', 'x-ratelimit-limit-tokens': '400000', 'x-ratelimit-remaining-requests': '600', 'x-ratelimit-remaining-tokens': '400000', 'strict-transport-security': 'max-age=15724800; includeSubDomains'})
+2025-02-06 14:51:27,821 - openai._base_client - DEBUG - request_id: None
+2025-02-06 14:51:27,855 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'json_data': {'messages': [{'role': 'system', 'content': "You are an information scientist with a specialization in data analysis and categorization, particularly within the domains of retail and library science. Your expertise lies in parsing and analyzing text for keywords and accurately categorizing items based on their descriptions. You have extensive experience in identifying and organizing items into predefined categories such as 'Household', 'Books', 'Clothing & Accessories', and 'Electronics'. Your skills are highly valuable in ensuring that items are correctly labeled, making it easier for users to find what they are looking for. You are adept at using sophisticated analytical tools and your deep understanding of each category allows you to make informed decisions about how to best classify items."}, {'role': 'user', 'content': 'Instructions:\n["List of ideas: Consider the following steps: analyze the text for keywords, compare the description with known items in each category, and then label the item as one of the following: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\']."]\n\nReturn your output in a json object with the following fields according to the format below. You must not return anything else besides the json object.\n\n----------------\nOutput format:\nlabel: (Literal) Return one of the choices from the following list: [\'Household\', \'Books\', \'Clothing & Accessories\', \'Electronics\'].\n----------------\nInput:\nKraft Seeds Multipurpose Kitchen Household and Garden Scissor (Color May Vary) Sharp edges easy to use confortable grip stylish look. Total length: 8.5-inch, blade size: 4.5-inch.\n'}, {'role': 'assistant', 'content': '{"label": '}], 'model': 'meta-llama/Llama-3.2-3B-Instruct', 'temperature': 1e-10, 'top_p': 1e-10}, 'extra_json': {'guided_json': {'properties': {'label': {'title': 'Label', 'type': 'string'}}, 'required': ['label'], 'title': 'classifier_schema', 'type': 'object'}}}
+2025-02-06 14:51:27,869 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions
+2025-02-06 14:51:27,872 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-02-06 14:51:27,881 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-02-06 14:51:27,889 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-02-06 14:51:27,895 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-02-06 14:51:27,899 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-02-06 14:51:28,306 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 06 Feb 2025 06:51:27 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'560'), (b'Connection', b'keep-alive'), (b'x-ratelimit-limit-requests', b'600'), (b'x-ratelimit-limit-tokens', b'400000'), (b'x-ratelimit-remaining-requests', b'600'), (b'x-ratelimit-remaining-tokens', b'400000'), (b'Strict-Transport-Security', b'max-age=15724800; includeSubDomains')])
+2025-02-06 14:51:28,308 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:51:28,315 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-02-06 14:51:28,318 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-02-06 14:51:28,327 - httpcore.http11 - DEBUG - response_closed.started
+2025-02-06 14:51:28,329 - httpcore.http11 - DEBUG - response_closed.complete
+2025-02-06 14:51:28,335 - openai._base_client - DEBUG - HTTP Response: POST https://api.studio.nebius.ai/v1/chat/completions "200 OK" Headers({'date': 'Thu, 06 Feb 2025 06:51:27 GMT', 'content-type': 'application/json', 'content-length': '560', 'connection': 'keep-alive', 'x-ratelimit-limit-requests': '600', 'x-ratelimit-limit-tokens': '400000', 'x-ratelimit-remaining-requests': '600', 'x-ratelimit-remaining-tokens': '400000', 'strict-transport-security': 'max-age=15724800; includeSubDomains'})
+2025-02-06 14:51:28,341 - openai._base_client - DEBUG - request_id: None
+2025-02-06 14:53:53,995 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2025-02-06 14:53:53,999 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\alexr\\anaconda3\\envs\\ai\\Library\\ssl\\cacert.pem'
+2025-02-06 14:54:44,705 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2025-02-06 14:54:44,711 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\alexr\\anaconda3\\envs\\ai\\Library\\ssl\\cacert.pem'
+2025-02-06 14:55:05,967 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:06,400 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:06,830 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:07,341 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:07,748 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:08,132 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:08,513 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:08,980 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:10,313 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:10,724 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:11,112 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:11,528 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:11,952 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:12,329 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:12,769 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:13,157 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:13,547 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:13,951 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:14,405 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:14,819 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:15,229 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:15,616 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:16,004 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:16,391 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:16,864 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:17,233 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:17,620 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:18,128 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:18,502 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:18,895 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:19,262 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:19,731 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:20,100 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:20,551 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:20,921 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:22,291 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:22,684 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:23,076 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:23,447 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:23,930 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:24,311 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:24,676 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:25,044 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:25,567 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:25,944 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:26,339 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:26,711 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:27,092 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:27,490 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:27,864 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:28,332 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:28,712 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:29,095 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:29,562 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:29,952 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:30,323 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:30,790 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:31,174 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:31,563 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:32,006 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:32,892 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:33,260 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:33,658 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:34,056 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:34,426 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:34,887 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:35,323 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:35,810 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:36,237 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:36,640 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:37,037 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:37,410 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:37,794 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:38,264 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:38,638 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:39,021 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:39,406 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:39,785 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:40,160 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:40,622 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:41,843 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:42,235 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:42,635 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:43,025 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:43,489 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:44,000 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:44,374 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:44,819 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:45,433 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:45,835 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:46,352 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:46,765 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:47,145 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:47,548 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:47,941 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:48,402 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:48,783 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:49,164 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:50,051 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:50,420 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:50,964 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:51,317 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:51,783 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:52,154 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:52,528 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:52,882 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:53,317 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:53,682 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:54,032 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:55,158 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:55,565 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:55,947 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:56,388 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:56,800 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:57,171 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:57,560 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:58,020 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:58,645 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:59,051 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:59,463 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:55:59,832 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:00,216 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:00,618 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:01,510 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:01,882 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:02,329 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:02,712 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:03,146 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:03,517 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:03,971 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:04,335 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:04,720 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:05,203 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:05,566 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:05,957 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:06,326 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:06,694 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:07,144 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:07,500 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:07,961 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:08,332 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:08,778 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:09,152 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:09,533 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:10,011 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:10,390 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:10,830 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:11,215 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:11,854 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:12,247 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:12,616 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:13,016 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:13,382 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:13,799 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:14,174 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:14,575 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:15,542 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:15,926 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:16,359 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:16,759 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:17,139 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:17,507 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:17,997 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:18,377 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:18,815 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:19,225 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:19,607 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:19,984 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:20,357 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:20,760 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:21,150 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:25,370 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:25,772 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:26,188 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:26,556 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:27,007 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:27,391 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:27,826 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:28,205 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:28,624 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:29,005 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:29,395 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:29,871 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:30,265 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:30,637 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:31,105 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:31,474 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:31,863 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:32,326 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:32,720 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:33,107 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:33,556 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:33,951 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:34,352 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:34,724 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:35,086 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:35,470 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:35,838 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:36,218 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:37,225 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:39,095 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:39,468 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:39,847 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:40,721 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:41,105 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:41,469 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:41,850 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:42,218 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:42,579 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:43,178 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:43,550 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:43,997 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:44,382 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:44,819 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:45,711 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:46,082 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:46,458 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:46,842 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:52,303 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:52,673 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:53,114 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:53,514 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:53,898 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:54,545 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:54,928 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:55,375 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:55,780 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:56,193 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:56,562 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:57,011 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:57,378 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:57,828 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:58,240 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:56:58,596 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:00,494 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:00,869 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:01,252 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:01,629 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:01,988 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:02,228 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 502 Bad Gateway"
+2025-02-06 14:57:02,238 - openai._base_client - INFO - Retrying request to /chat/completions in 0.429789 seconds
+2025-02-06 14:57:03,008 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:03,463 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:03,828 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:04,277 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:04,642 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:05,102 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:05,478 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:05,921 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:06,355 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:06,842 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:07,224 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:07,593 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:08,175 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:08,580 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:08,957 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:09,326 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:09,690 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:10,059 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:11,041 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:11,409 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:11,856 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:12,224 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:12,592 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:12,989 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:13,384 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:13,811 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:14,174 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:14,625 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:15,028 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:15,410 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:15,807 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:16,194 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:16,573 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:16,956 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:17,346 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:17,798 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:18,176 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:18,554 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:18,927 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:19,308 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:19,690 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:20,156 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:20,553 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:20,942 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:21,384 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:22,303 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:22,708 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:23,076 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:23,441 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:23,829 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:24,239 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:24,640 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:25,030 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:25,466 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:25,902 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:26,287 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:26,720 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:27,113 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:27,527 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:27,923 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:28,298 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:28,358 - my_app - INFO - Round 1
+2025-02-06 14:57:39,918 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:39,921 - my_app - INFO - Mutations completed for 10 instructions
+2025-02-06 14:57:41,031 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:41,387 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:41,864 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:42,234 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:42,615 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:42,984 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:43,398 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:43,912 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:44,317 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:44,712 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:45,085 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:46,063 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:46,472 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:46,830 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:47,285 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:47,906 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:48,296 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:48,685 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:49,131 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:49,500 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:49,882 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:50,247 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:50,621 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:51,079 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:51,489 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:51,862 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:52,298 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:52,668 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:53,130 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:53,742 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:55,073 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:55,442 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:55,817 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:56,173 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:56,544 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:56,904 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:57,274 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:57,733 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:58,097 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:58,467 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:58,837 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:59,274 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:57:59,624 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:00,090 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:00,460 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:00,910 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:01,823 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:02,549 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:02,922 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:03,358 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:03,778 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:04,139 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:04,597 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:04,972 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:05,340 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:05,825 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:06,196 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:06,645 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:07,000 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:07,460 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:07,821 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:08,273 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:08,664 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:09,049 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:09,421 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:09,820 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:10,189 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:10,569 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:10,954 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:11,457 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:11,825 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:12,236 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:12,693 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:13,246 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:13,622 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:14,007 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:14,395 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:14,836 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:15,196 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:15,614 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:16,004 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:16,420 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:16,884 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:17,294 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:17,708 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:18,417 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:18,800 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:19,124 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 502 Bad Gateway"
+2025-02-06 14:58:19,138 - openai._base_client - INFO - Retrying request to /chat/completions in 0.438915 seconds
+2025-02-06 14:58:19,917 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:20,368 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:20,767 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:21,172 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:22,517 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:22,903 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:23,338 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:23,796 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:24,148 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:24,500 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:24,899 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:25,382 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:25,792 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 14:58:25,807 - my_app - INFO - Found 21 wrong examples
+2025-02-06 14:58:46,474 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:33,604 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:33,995 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:34,377 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:34,762 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:35,207 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:35,664 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:36,055 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:36,445 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:36,883 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:37,258 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:37,674 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:38,124 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:38,508 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:38,891 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:39,306 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:39,690 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:40,168 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:40,572 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:40,975 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:41,377 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:41,755 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:42,154 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:42,636 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:43,139 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:43,522 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:43,965 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:44,359 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:45,235 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:45,806 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:46,885 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:47,441 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:47,842 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:48,237 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:49,385 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:49,763 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:50,135 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:50,639 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:51,124 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:51,489 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:51,877 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:52,355 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:52,969 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:53,334 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:53,718 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:54,094 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:54,467 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:54,863 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:55,325 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:55,717 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:56,083 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:56,550 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:56,929 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:57,316 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:57,782 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:58,158 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:58,533 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:58,999 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:59,414 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:04:59,799 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:00,185 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:00,572 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:00,955 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:01,344 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:01,715 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:02,182 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:02,565 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:02,947 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:03,414 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:03,822 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:04,230 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:04,614 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:05,014 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:05,418 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:05,864 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:06,280 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:06,661 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:07,397 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:07,813 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:08,194 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:08,600 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:09,046 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:09,453 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:09,968 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:10,472 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:10,861 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:11,278 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:11,663 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:12,045 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:12,648 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:13,143 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:13,544 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:13,927 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:14,678 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:15,080 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:15,477 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:16,420 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:16,827 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:17,208 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:17,576 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:18,066 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:18,565 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:19,079 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:19,469 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:19,846 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:20,244 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:20,629 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:20,993 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:22,355 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:22,750 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:23,141 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:23,527 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:23,996 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:24,378 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:24,815 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:25,208 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:25,600 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:25,990 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:26,388 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:26,792 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:27,174 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:27,539 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:27,944 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:28,325 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:28,706 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:29,117 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:29,507 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:29,898 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:30,288 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:30,659 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:31,054 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:31,422 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:31,879 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:32,270 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:32,645 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:33,121 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:33,497 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:33,884 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:34,254 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:34,636 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:35,017 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:35,465 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:35,837 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:36,386 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:36,903 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:37,308 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:37,701 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:38,536 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:38,919 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:39,307 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:39,669 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:40,380 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:40,769 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:41,187 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:41,611 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:42,532 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:42,905 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:43,271 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:43,682 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:44,050 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:44,434 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:44,821 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:45,300 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:45,684 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:46,103 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:46,478 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:46,866 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:47,733 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:48,111 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:48,499 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:48,983 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:49,361 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:49,745 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:50,615 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:51,133 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:51,515 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:51,897 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:52,355 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:52,914 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:53,385 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:53,780 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:54,147 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:54,614 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:54,992 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:55,384 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:55,843 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:56,351 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:56,808 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:57,196 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:57,687 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:58,083 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:58,479 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:58,866 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:59,313 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:05:59,712 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:06:00,095 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:06:00,476 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:06:00,851 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:06:01,230 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:06:01,609 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-06 15:06:02,077 - httpx - INFO - HTTP Request: POST https://api.studio.nebius.ai/v1/chat/completions "HTTP/1.1 200 OK"

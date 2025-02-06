@@ -21,9 +21,7 @@ class MutationAgent(BaseAgent):
         self.mutation_template = mutation_instruction_template
         self.thinking_styles = thinking_styles
     
-    def _generate_prompt(self, task_description, num_variations, seed_instruction):
-        
-    
+    def _generate_prompt(self, task_description, num_variations, seed_instruction):    
         system_prompt = "You are a prompt engineering expert. Generate variations of the given prompt."
         thinking_styles = [f"- {f}" for f in random.sample(self.thinking_styles, num_variations)]
         user_prompt = self.mutation_template.format(
@@ -44,9 +42,10 @@ class MutationAgent(BaseAgent):
         """Extract mutated prompts from LLM response"""
         try:
             response = json.loads(response)
-            print("LLM thinking:", response['thinking'])
+            # print("LLM thinking:", response['thinking'])
+            # print(response)
             return response['mutated_instructions']
-        except json.JSONDecodeError:
+        except json.JSONDecodeError or KeyError:
             print("Failed to parse LLM response. Returning empty list.")
             print("LLM response:", response)
-            return []
+            raise ValueError("Failed to parse LLM response.")
