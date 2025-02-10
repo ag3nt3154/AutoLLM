@@ -28,7 +28,6 @@ class RefineAgent(BaseAgent):
             {"role": "user", "content": user_prompt},
             {"role": "assistant", "content": '{"thinking": '},
         ]
-        print(messages)
         return messages
     
     def _parse_response(self, response):

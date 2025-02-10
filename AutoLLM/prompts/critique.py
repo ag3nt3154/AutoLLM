@@ -15,12 +15,13 @@ However, the current instruction gets the following examples wrong.
 Steps:
 1. Examine each wrong example and the agent's output using the current instruction. 
 2. For each wrong example, hypothesize why the current instruction does not produce the correct output.
-3. Provide a critique of the current instruction and detailed feedback which identifies reasons where an agent following the current instruction could have gone wrong. 
-4. List down the reasons why the current instruction does not produce the correct output for the examples given and how the current instruction can be improved.
+3. For each wrong example, provide a critique of the current instruction which includes:
+    - Detailed feedback which identifies reasons where an agent following the current instruction could have gone wrong.
+    - How the current instruction could be improved to produce the correct output for the example.
 
 -------------------
 Output Format:
 Return your output in a json format with the following fields. Do not return anything except the json object.
 - thinking: (str) Return logical reasoning for the mutation as well as the steps you took to arrive at your critique.
-- critique: (List) Return the reason why the current instruction does not produce the correct output for each example and how the current instruction can be improved.
+- critique: (List) Return the list of critiques you generated. There must be 1 critique for each wrong example.
 """

@@ -4,7 +4,7 @@ from pydantic import BaseModel
 from typing import List, Dict, Optional
 from AutoLLM.modules.base_agent import BaseAgent
 from AutoLLM.prompts.thinking_styles import thinking_styles
-from AutoLLM.prompts.mutation_instructions import mutation_instruction_template
+from AutoLLM.prompts.mutate import mutation_instruction_template
 
 class PromptMutatorSchema(BaseModel):
     thinking: str
@@ -30,7 +30,7 @@ class MutationAgent(BaseAgent):
             thinking_styles="\n".join(thinking_styles),
             num_variations=num_variations,
         )
-        print(user_prompt)
+
         messages = [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt},

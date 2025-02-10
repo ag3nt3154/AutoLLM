@@ -12,10 +12,10 @@ The following are examples where the current instruction has gone wrong and corr
 {examples}
 
 Steps:
-1. Examine each wrong example, agent's output using the current instruction, and the critique of the current instruction for each example.
-2. Use the critique provided to generate {num_variations} refined instructions by improving the current instruction based on the critique.
-3. You may generalise the critique to generate more refined instructions.
-4. You must generate refined instructions that keep similar semantic meaning as the original instruction and can be used to instruct an agent to accomplish the task described in the task description.
+1. Analyse each wrong example, the agent's output using the current instruction, and the critique of the current instruction for each example. 
+2. Generalize the common issues with the current instruction and use them to generate {num_variations} refined instructions by improving the current instruction based on the critique.
+3. You may generalise the critiques to generate more refined instructions.
+4. Use your full creativity, but you must generate refined instructions that can be used to instruct an agent to better accomplish the task described in the task description.
 
 --------------------
 Output Format:
