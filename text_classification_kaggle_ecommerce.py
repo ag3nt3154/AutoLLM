@@ -18,6 +18,7 @@ from AutoLLM.interfaces.api_client import APIClient
 from AutoLLM.prompts.classifier import classifier_template
 from AutoLLM.modules.base_agent import BaseAgent
 from AutoLLM.modules.optimization import OptimusPrompt
+from AutoLLM.modules.classifier_agent import ClassifierAgent
 
 # Import configuration variables
 from config import API_KEY
@@ -26,35 +27,6 @@ from config import API_KEY
 # Global Constants
 # --------------------------------------------------------------------
 API_URL = "https://api.studio.nebius.ai/v1/"
-
-
-# --------------------------------------------------------------------
-# Data Loading and Splitting
-# --------------------------------------------------------------------
-def load_and_split_data(pickle_path: str) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, List[str]]:
-    """
-    Load the e-commerce dataset from a pickle file and split it into training,
-    validation, and test sets.
-
-    Args:
-        pickle_path (str): Path to the pickle file containing the dataset.
-
-    Returns:
-        Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, List[str]]:
-            A tuple containing the training DataFrame, validation DataFrame,
-            test DataFrame, and list of possible labels.
-    """
-    # Load the dataset
-    df = pd.read_pickle(pickle_path)
-    possible_labels = list(df['label'].unique())
-
-    # Split the dataset into training and test sets.
-    # Here, the test set is defined as 100 samples (100 / total samples).
-    df_train, df_test = split_dataframe(df, 100 / df.shape[0], 123, 'label')
-    # Further split the training set to extract a validation set (20 samples).
-    df_train, df_val = split_dataframe(df_train, 20 / df_train.shape[0], 123, 'label')
-
-    return df_train, df_val, df_test, possible_labels
 
 
 # --------------------------------------------------------------------
@@ -70,142 +42,7 @@ class ClassifierSchema(BaseModel):
 # --------------------------------------------------------------------
 # Classifier Agent
 # --------------------------------------------------------------------
-class ClassifierAgent(BaseAgent):
-    """
-    Agent that interacts with the language model API to classify input text.
 
-    Attributes:
-        client (APIClient): The API client for making requests.
-        json_schema (BaseModel): Schema to validate and parse API responses.
-        gen_config (dict): Generation configuration for the API client.
-        template (str): Template string for constructing prompts.
-        guide (str): Guide text to steer the assistant's output.
-        output_format (str): Information about the expected output format.
-        system_message (str): System-level instruction for the assistant.
-        instructions (str): Specific instructions for the classification task.
-        X (List[str]): List of input texts (optional storage).
-        y_true (List[str]): List of ground truth labels (optional storage).
-    """
-
-    def __init__(self, client: APIClient, json_schema: BaseModel, gen_config: dict, possible_labels: List[str]):
-        """
-        Initialize the ClassifierAgent.
-
-        Args:
-            client (APIClient): The API client instance.
-            json_schema (BaseModel): Schema for output validation.
-            gen_config (dict): Generation configuration.
-            possible_labels (List[str]): List of possible classification labels.
-        """
-        super().__init__(client, json_schema, gen_config)
-        self.template = classifier_template
-        self.guide = '{"label": '  # Starting string for the assistant's response.
-        self.output_format = (
-            f"label: (Literal) Return one of the choices from the following list: {possible_labels}."
-        )
-        self.system_message = "You are a helpful AI assistant."
-        self.instructions = ""
-        self.X = None
-        self.y_true = None
-
-    def _generate_prompt(self, **kwargs) -> List[dict]:
-        """
-        Generate a list of messages to form the prompt for the API call.
-
-        Expected keyword arguments:
-            - input (str): The input text.
-            - instructions (str, optional): Instructions for the classification task.
-
-        Returns:
-            List[dict]: A list of message dictionaries to send to the API.
-
-        Raises:
-            ValueError: If instructions are not set.
-        """
-        if not self.instructions:
-            if 'instructions' in kwargs:
-                self.instructions = kwargs['instructions']
-            else:
-                raise ValueError("Instructions not set.")
-
-        # Create the user prompt using the provided template.
-        self.user_prompt = self.template.format(
-            instructions=self.instructions,
-            output_format=self.output_format,
-            input=kwargs['input']
-        )
-        messages = [
-            {"role": "system", "content": self.system_message},
-            {"role": "user", "content": self.user_prompt},
-            {"role": "assistant", "content": self.guide},
-        ]
-        return messages
-
-    def _parse_response(self, response: str) -> str:
-        """
-        Parse the JSON-formatted response from the API to extract the label.
-
-        Args:
-            response (str): The API response as a JSON-formatted string.
-
-        Returns:
-            str: The extracted label.
-
-        Raises:
-            AssertionError: If the response cannot be parsed correctly.
-        """
-        try:
-            resp = json.loads(response)['label']
-        except (json.JSONDecodeError, KeyError):
-            print("Failed to parse response:", response)
-            assert False, "Response parsing failed."
-        return resp
-
-    def run_samples(self, inputs: List[str]) -> List[str]:
-        """
-        Run classification on a list of input texts.
-
-        Args:
-            inputs (List[str]): List of input text strings.
-
-        Returns:
-            List[str]: List of predicted labels.
-        """
-        predictions = []
-        for input_text in tqdm(inputs, desc="Running classifier"):
-            label = self.run(input=input_text)
-            predictions.append(label)
-        return predictions
-
-    def evaluate_accuracy(self, X: List[str] = None, y_true: List[str] = None) -> Tuple[float, List[str]]:
-        """
-        Evaluate the classifier's accuracy on a given set of inputs and labels.
-
-        Args:
-            X (List[str], optional): List of input texts. Defaults to self.X if not provided.
-            y_true (List[str], optional): List of ground truth labels. Defaults to self.y_true if not provided.
-
-        Returns:
-            Tuple[float, List[str]]: A tuple containing the accuracy score and the list of predictions.
-        """
-        if X is None or y_true is None:
-            X = self.X
-            y_true = self.y_true
-
-        predictions = self.run_samples(X)
-        accuracy = accuracy_score(y_true, predictions)
-        return accuracy, predictions
-
-    def load_data(self, X: List[str], y_true: List[str]) -> None:
-        """
-        Load input texts and corresponding true labels into the agent.
-
-        Args:
-            X (List[str]): List of input texts.
-            y_true (List[str]): List of true labels.
-        """
-        self.X = X
-        self.y_true = y_true
 
 
 # --------------------------------------------------------------------
@@ -394,7 +231,15 @@ def main():
     # Data Loading and Preparation
     # ------------------------------
     pickle_path = './data/Ecommerce/ecommerce_classification_dataset.pkl'
-    df_train, df_val, df_test, possible_labels = load_and_split_data(pickle_path)
+    # Load the dataset
+    df = pd.read_pickle(pickle_path)
+    possible_labels = list(df['label'].unique())
+
+    # Split the dataset into training and test sets, 100 samples each
+    df_train, df_test = split_dataframe(df, 100 / df.shape[0], 123, 'label')
+    _, df_train = split_dataframe(df_train, 100 / df_train.shape[0], 123, 'label')
+    assert len(df_train) == len(df_test) == 100
+    
 
     # ------------------------------
     # Set up Classifier Client and Agent
