@@ -100,3 +100,7 @@ optimus = OptimusPrompt(
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
+
+## TODO
+- [ ] synthetic data generation
+- [ ] add improve prompt incase there are no wrong examples (lmao)

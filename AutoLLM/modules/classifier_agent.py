@@ -7,6 +7,19 @@ from AutoLLM.interfaces.api_client import APIClient
 from AutoLLM.prompts.classifier import classifier_template
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
+class ClassifierSchema(BaseModel):
+    """
+    Pydantic schema to validate and parse the classifier's output.
+    """
+    output: str
+
+class ClassifierCotSchema(BaseModel):
+    """
+    Pydantic schema to validate and parse the classifier's output.
+    """
+    thinking: str
+    output: str
+
 class ClassifierAgent(BaseAgent):
     """
     Agent that interacts with the language model API to classify input text.
@@ -25,7 +38,7 @@ class ClassifierAgent(BaseAgent):
         metrics_history (List[dict]): History of evaluation metrics.
     """
 
-    def __init__(self, client: APIClient, json_schema: BaseModel, gen_config: dict, possible_labels: List[str]):
+    def __init__(self, client: APIClient, json_schema: BaseModel, gen_config: dict, output_format: str):
         """
         Initialize the ClassifierAgent.
 
@@ -37,15 +50,12 @@ class ClassifierAgent(BaseAgent):
         """
         super().__init__(client, json_schema, gen_config)
         self.template = classifier_template
-        self.guide = '{"label": '  # Starting string for the assistant's response.
-        self.output_format = (
-            f"label: (Literal) Return one of the choices from the following list: {possible_labels}."
-        )
+         # Starting string for the assistant's response.
+
+        self.guide = '{"output": '
+        self.output_format = output_format
         self.system_message = "You are a helpful AI assistant."
         self.instructions = ""
-        self.X = None
-        self.y_true = None
-        self.metrics_history = []
 
     def _generate_prompt(self, **kwargs) -> List[dict]:
         """
@@ -94,13 +104,13 @@ class ClassifierAgent(BaseAgent):
             AssertionError: If the response cannot be parsed correctly.
         """
         try:
-            resp = json.loads(response)['label']
+            resp = json.loads(response)
         except (json.JSONDecodeError, KeyError):
             print("Failed to parse response:", response)
-            assert False, "Response parsing failed."
+            resp = {"output": "ERROR"}
         return resp
 
-    def run_samples(self, inputs: List[str]) -> List[str]:
+    def run_samples(self, df) -> List[str]:
         """
         Run classification on a list of input texts.
 
@@ -110,13 +120,18 @@ class ClassifierAgent(BaseAgent):
         Returns:
             List[str]: List of predicted labels.
         """
-        predictions = []
+        df = df.copy()
+        inputs = df['input'].tolist()
+        outputs = []
         for input_text in tqdm(inputs, desc="Running classifier"):
-            label = self.run(input=input_text)
-            predictions.append(label)
-        return predictions
+            resp = self.run(input=input_text)
+            outputs.append(resp['output'])
+        
+        # Add outputs and thinking to the DataFrame
+        df['output'] = outputs
+        return df
 
-    def evaluate_accuracy(self, X: List[str] = None, y_true: List[str] = None) -> Tuple[dict, List[str]]:
+    def evaluate_accuracy(self, df):
         """
         Evaluate the classifier's performance on a given set of inputs and labels.
 
@@ -127,82 +142,12 @@ class ClassifierAgent(BaseAgent):
         Returns:
             Tuple[dict, List[str]]: A tuple containing the metrics dictionary and the list of predictions.
         """
-        if X is None or y_true is None:
-            X = self.X
-            y_true = self.y_true
+        df = df.copy()
+        if "input" not in df.columns:
+            raise ValueError("Input texts not found in the DataFrame.")
+        if "label" not in df.columns:
+            raise ValueError("True labels not found in the DataFrame.")
 
-        predictions = self.run_samples(X)
-        metrics = {
-            'accuracy': accuracy_score(y_true, predictions),
-            'precision': precision_score(y_true, predictions, average='weighted'),
-            'recall': recall_score(y_true, predictions, average='weighted'),
-            'f1': f1_score(y_true, predictions, average='weighted')
-        }
-        self.metrics_history.append(metrics)
-        return metrics, predictions
-
-    def run_loop(self, X_train: List[str], y_train: List[str], X_val: List[str], y_val: List[str], 
-                num_iterations: int = 5) -> dict:
-        """
-        Run the optimization loop for the classifier.
-
-        Args:
-            X_train (List[str]): Training input texts.
-            y_train (List[str]): Training labels.
-            X_val (List[str]): Validation input texts.
-            y_val (List[str]): Validation labels.
-            num_iterations (int): Number of optimization iterations.
-
-        Returns:
-            dict: Final metrics after optimization.
-        """
-        self.load_data(X_train, y_train)
-        
-        for iteration in tqdm(range(num_iterations), desc="Optimization Loop"):
-            # Evaluate current performance
-            metrics, predictions = self.evaluate_accuracy(X_val, y_val)
-            
-            # Identify misclassified examples
-            wrong_examples = [
-                (X_val[i], y_val[i], predictions[i])
-                for i in range(len(predictions))
-                if predictions[i] != y_val[i]
-            ]
-            
-            # Update instructions based on errors
-            if wrong_examples:
-                self._update_instructions(wrong_examples)
-            
-            # Log progress
-            print(f"Iteration {iteration + 1}/{num_iterations}")
-            print(f"Validation Metrics: {metrics}")
-
-        return self.metrics_history[-1]
-
-    def _update_instructions(self, wrong_examples: List[Tuple[str, str, str]]) -> None:
-        """
-        Update the classification instructions based on wrong examples.
-
-        Args:
-            wrong_examples (List[Tuple[str, str, str]]): List of (text, true_label, predicted_label) tuples.
-        """
-        error_analysis = "\n".join(
-            f"Text: {text}\nTrue Label: {true_label}\nPredicted Label: {pred_label}"
-            for text, true_label, pred_label in wrong_examples
-        )
-        
-        self.instructions = (
-            f"{self.instructions}\n\n"
-            f"Pay special attention to these cases:\n{error_analysis}"
-        )
-
-    def load_data(self, X: List[str], y_true: List[str]) -> None:
-        """
-        Load input texts and corresponding true labels into the agent.
-
-        Args:
-            X (List[str]): List of input texts.
-            y_true (List[str]): List of true labels.
-        """
-        self.X = X
-        self.y_true = y_true
+        df = self.run_samples(df)
+        metrics = accuracy_score(df['label'], df['output'])
+        return metrics, df

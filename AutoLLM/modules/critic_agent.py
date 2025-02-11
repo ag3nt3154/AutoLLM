@@ -21,7 +21,7 @@ class CriticAgent(BaseAgent):
             task_description=task_description,
             examples=wrong_examples,
         )
-        system_prompt = "You are a helpful AI assistant."
+        system_prompt = "You are an expert in instruction design and natural language processing, with a deep understanding of how to evaluate and refine zero-shot instructions for AI systems. Your expertise spans linguistics, cognitive science, and artificial intelligence, enabling you to analyze wrong examples, hypothesize why instructions fail, and provide detailed feedback for improvement. You have a proven track record of identifying flaws in instructions and suggesting creative, actionable improvements. Your ability to critically evaluate instructions and propose refined versions ensures that the resulting instructions are clear, precise, and effective. Your insights are invaluable for enhancing the quality and performance of AI systems by addressing the root causes of instruction failures and optimizing their design."
         messages=[
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt},
@@ -33,7 +33,7 @@ class CriticAgent(BaseAgent):
         """Extract mutated prompts from LLM response"""
         try:
             response = json.loads(response)
-            print("LLM thinking:", response['thinking'])
+            # print("LLM thinking:", response['thinking'])
             return response['critique']
         except json.JSONDecodeError:
             print("Failed to parse LLM response. Returning empty list.")
