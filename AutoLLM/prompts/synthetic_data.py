@@ -1,27 +1,11 @@
-SYNTHETIC_DATA_PROMPT = """You are an expert at generating synthetic data that maintains the characteristics of real-world examples. Your task is to create new examples that are similar to the provided examples but are not direct copies.
-
-Guidelines:
-1. Maintain the same style, tone, and format as the original examples
-2. Preserve key characteristics and patterns
-3. Introduce natural variations while staying realistic
-4. Ensure the new examples are diverse and cover different aspects of the data
-
-Examples:
-{examples}
-
-Generate {num_samples} new examples that follow these guidelines. Each example should be distinct and realistic.
-
-New Examples:
-1. """
-
-
 synthetic_data_prompt = """Task:
 Generate synthetic data entries derived from the provided dataset. Each entry must include input text and an output output. The synthetic data should preserve the original data's statistical patterns and output relationships while introducing sufficient variation to avoid duplication. Follow the instructions below to ensure quality and diversity.
+
 
 -----------------------
 Detailed Instructions:
 1. Analyze Original Data:
-    - Identify patterns in input text (e.g., sentiment, topics, structure) and output relationships (e.g., "positive" outputs correlate with specific keywords).
+    - Identify patterns in input text (e.g., sentiment, topics, structure) and output relationships (e.g., "positive" outputs correlate with specific keywords). Reference and analyze the task description if you are uncertain.
 2. Apply Transformations:
     - Paraphrasing: Reword sentences while retaining core meaning (e.g., "The app is user-friendly" → "This application has an intuitive interface").
     - Noise Introduction: Add minor typos, punctuation changes, or irrelevant phrases (e.g., "The camera quality is excellent!" → "Camera qualty is amazing, btw!").
@@ -43,6 +27,10 @@ Return a JSON object with the field "synthetic_examples" which should contain a 
 
 ----------------------
 Example Input/Output:
+
+Task Description:
+Analyze sentiment from text.
+
 Original: 
 "input": "The hotel staff was rude.", "output": "negative"
 
@@ -52,6 +40,11 @@ Synthetic:
 
 
 ----------------------
-Input:
-Original: {examples}
+Actual Input:
+
+Task Description:
+{task_description}
+
+Original: 
+{examples}
 """
