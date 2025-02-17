@@ -110,3 +110,24 @@ def split_dataframe(df, test_size=0.2, random_state=None, stratify_col=None):
         stratify=stratify
     )
     return train_df, test_df
+
+
+
+def append_dict_to_dataframe(df, new_row):
+    """
+    Appends a dictionary as a new row to the end of a DataFrame.
+
+    Parameters:
+        df (pd.DataFrame): The original DataFrame.
+        new_row (dict): A dictionary representing the new row to append.
+
+    Returns:
+        pd.DataFrame: The updated DataFrame with the new row appended.
+    """
+    # Convert the dictionary to a DataFrame
+    new_row_df = pd.DataFrame([new_row])
+
+    # Append the new row to the original DataFrame using concat
+    updated_df = pd.concat([df, new_row_df], ignore_index=True)
+
+    return updated_df

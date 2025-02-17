@@ -1,25 +1,25 @@
 import json
 from AutoLLM.modules.base_agent import BaseAgent
-from AutoLLM.prompts.instruction_generation import instruction_generation_template
+from AutoLLM.prompts.instruction_generation import INSTRUCTION_GENERATION_TEMPLATE
+from pydantic import BaseModel
+from typing import List, Dict
+
+class InstructionGenerationSchema(BaseModel):
+    thinking: str
+    instruction: List[Dict]
 
 class InstructionGenerationAgent(BaseAgent):
-    def __init__(self, client, json_schema=None, gen_config=None):
+    def __init__(self, client, gen_config):
+        json_schema = InstructionGenerationSchema
         super().__init__(client, json_schema, gen_config)
-        self.template = instruction_generation_template
+        self.template = INSTRUCTION_GENERATION_TEMPLATE
 
-    def _generate_prompt(self, task_description, X, y_true):
-        if len(X) != len(y_true):
-            raise ValueError("X and y_true must have the same length.")
-        examples = []
-        for i in range(len(X)):
-            example = {
-                'input': X[i],
-                'output': y_true[i]
-            }
-            examples.append(example)
+    def _generate_prompt(self, task_description: str, num_variations: int, rules: str, examples: str):
         user_prompt = self.template.format(
             task_description=task_description,
-            examples="\n".join([f"- Input: {ex['input']}\n  Output: {ex['output']}" for ex in examples])
+            num_variations=num_variations,
+            rules=rules,
+            examples=examples
         )
         system_prompt = """You are a highly skilled AI agent specializing in task analysis, instruction generation, and problem-solving. You excel at breaking down complex tasks into clear, actionable steps, interpreting patterns from examples, and ensuring instructions are precise and easy to follow. With expertise in natural language processing, logical reasoning, and contextual comprehension, you adapt to various tasks, from data transformation to technical problem-solving. Your attention to detail guarantees clarity and accuracy, making you a trusted resource for high-quality instruction creation."""
 
