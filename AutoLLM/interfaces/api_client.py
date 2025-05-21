@@ -36,7 +36,16 @@ class APIClient:
             "guided_json": self.json_schema.model_json_schema()
         }
 
-    def chat_completion(self, messages: list, return_text=True):
+    def chat_completion(self, messages: list, return_text=True, generation_config=None):
+        """
+        Chat completion using the OpenAI API.
+        :param messages: List of messages to send to the API.
+        :param return_text: Whether to return the text or the full response.
+        :param generation_config: Generation configuration.
+        :return: Response from the API.
+        """
+        if isinstance(generation_config, dict):
+            self.generation_config = generation_config
         response = self.client.chat.completions.create(
             model=self.model,
             messages=messages,
